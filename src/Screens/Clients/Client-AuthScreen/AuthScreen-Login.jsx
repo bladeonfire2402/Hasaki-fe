@@ -2,7 +2,7 @@
 
 const AuthScreen_Login = () => {
   return (
-    <div>AuthScreen-Login</div>
+    <div className="">AuthScreen-Login</div>
   )
 }
 

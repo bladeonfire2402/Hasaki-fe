@@ -1,9 +1,7 @@
-/** @type {import('tailwindcss').Config} */
-export default {
-    content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
-    theme: {
-      extend: {},
-    },
-    plugins: [],
-  };
-  
+export const content = [
+  './src/**/*.{html,js}', // Đảm bảo Tailwind quét các tệp HTML và JS của bạn
+];
+export const theme = {
+  extend: {},
+};
+export const plugins = [];

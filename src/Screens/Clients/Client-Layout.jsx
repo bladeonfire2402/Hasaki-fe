@@ -8,7 +8,7 @@ const Client_Layout = () => {
     <div className='Client-Layout'>
         <Routes>
           <Route path='/auth/login' element={<AuthScreen_Login/>}/>
-          <Route path='register' element={<AuthScreen_Register/>}/>
+          <Route path='/auth/register' element={<AuthScreen_Register/>}/>
         </Routes>
     </div> 
     )
