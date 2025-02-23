@@ -1,9 +1,9 @@
 
 
-const Header = () => {
+const HeaderHasaki = () => {
   return (
     <div>Header</div>
   )
 }
 
-export default Header
+export default HeaderHasaki

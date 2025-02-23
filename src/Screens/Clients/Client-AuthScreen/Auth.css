@@ -1,0 +1,26 @@
+.AuthScreen-wrapper{
+  background: rgb(34,2,151);
+  background: linear-gradient(180deg, rgba(34,2,151,1) 0%, rgba(0,0,0,1) 100%);
+}
+
+.AuthScreen-wrapper .AuthScreen__BoxContent{
+  background: rgb(34,2,151);
+  background: linear-gradient(90deg, rgba(34,2,151,1) 0%, rgba(255,255,255,1) 100%);
+}
+
+.AuthScreen__BoxContent-SignIn input:focus, .AuthScreen__BoxContent-Register input:focus, .AuthScreen__BoxContent-ResetPassword  input:focus{
+  border: 2px solid rgb(128, 1, 255);  /* Viền màu xanh khi focus */
+  outline: none;              /* Bỏ đường viền mặc định của trình duyệt */
+  box-shadow: 0 0 5px rgb(128, 1, 255); /* Đổ bóng nhẹ */
+  transform: scale(1.05);     /* Phóng to nhẹ input */
+  transition: all 0.5s ease;
+}
+
+.AuthScreen__BoxContent-SignIn, .AuthScreen__BoxContent-Register{
+  border: none;
+}
+
+
+.AuthScreen-wrapper .AuthScreen__BoxContent-ResetPassword{
+  background: rgba(255, 255, 255, 0.1);
+}

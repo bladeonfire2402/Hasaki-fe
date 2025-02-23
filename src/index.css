@@ -1,3 +1,60 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/*Nhúng font opensans*/
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap');
+
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('./assets/fonts/Poppins-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: Regular;
+  }
+  
+  @font-face{
+    font-family: 'Gilroy';
+    src: url('./assets/fonts/Gilroy-Bold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: Regular;
+  }
+  
+  @font-face{
+    font-family: 'Missing-Love';
+    src: url('./assets/fonts/Missing-Lovely-Regular.otf') format('truetype');
+  }
+  
+  @font-face{
+    font-family: 'Gilroy-Bold';
+    src: url('./assets/fonts/Gilroy-Bold.ttf') format('truetype');
+  }
+
+
+  /*class về font chữ*/
+.text-poppins{
+    font-family: 'Poppins';
+  }
+  
+  .text-gilroy-bold{
+    font-family:'Gilroy-Bold' ;
+  }
+  
+  .text-missing-love{
+    font-family: 'Missing-Love';
+  }
+  
+  .text-gilroy{
+    font-family: 'Gilroy';
+  }
+  
+
+
+.text-purple{
+  color: rgb(114, 8, 227);
+}
+
+
+.over-hidden{
+  overflow: hidden;
+}

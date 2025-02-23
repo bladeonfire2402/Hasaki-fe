@@ -1,8 +1,8 @@
 
-export const Footer = () => {
+export const FooterHasaki = () => {
     return (
       <div>Header</div>
     )
 }
 
-export default Footer
+export default FooterHasaki

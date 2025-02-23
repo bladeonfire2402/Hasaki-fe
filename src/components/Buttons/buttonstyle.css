@@ -1,0 +1,13 @@
+.btn{
+
+}
+
+.primary{
+    background-color: white;
+    color: rgb(114, 8, 227);
+}
+
+.zoom-effect:hover{
+    transform: scale(1.05);
+    transition: 0.5s ease-in-out;
+}

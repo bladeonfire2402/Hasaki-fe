@@ -1,15 +1,17 @@
-
 import { Route,Routes  } from 'react-router-dom'
-import AuthScreen_Login from './Client-AuthScreen/AuthScreen-Login'
 import AuthScreen_Register from './Client-AuthScreen/AuthScreen-Register'
+import HeaderHasaki from '../../Components/Header/Header'
+import FooterHasaki from '../../Components/Footer/Footer'
 
 const Client_Layout = () => {
   return (
     <div className='Client-Layout'>
+       <HeaderHasaki/>
         <Routes>
-          <Route path='/auth/login' element={<AuthScreen_Login/>}/>
+      
           <Route path='/auth/register' element={<AuthScreen_Register/>}/>
         </Routes>
+       <FooterHasaki/>
     </div> 
     )
 }
