@@ -5,7 +5,7 @@ import FooterHasaki from '../../Components/Footer/Footer'
 
 const Client_Layout = () => {
   return (
-    <div className='Client-Layout'>
+    <div className='Client-Layout h-full'>
        <HeaderHasaki/>
         <Routes>
       

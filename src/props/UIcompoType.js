@@ -9,7 +9,16 @@ const PrimaryButtonPropTypes = {
 
 const TitleText_PropTypes={
     title:PropTypes.string.isRequired,
-    color:PropTypes.string
+    color:PropTypes.string,
+    otherStyle:PropTypes.string
 }
 
-export {PrimaryButtonPropTypes,TitleText_PropTypes}
+const Container_PropTypes={
+    bgColor:PropTypes.string,
+    flexType:PropTypes.string , //Row or col
+    align:PropTypes.bool.isRequired, //Truyền true thì bật align center
+    justify:PropTypes.bool.isRequired ,// Truyền true thì bật justify center
+    gap:PropTypes.string
+}
+
+export {PrimaryButtonPropTypes,TitleText_PropTypes,Container_PropTypes}

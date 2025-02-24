@@ -24,22 +24,23 @@
     font-family: 'Missing-Love';
     src: url('./assets/fonts/Missing-Lovely-Regular.otf') format('truetype');
   }
-  
+
+    
   @font-face{
-    font-family: 'Gilroy-Bold';
-    src: url('./assets/fonts/Gilroy-Bold.ttf') format('truetype');
+    font-family: 'Lexend';
+    src: url('./assets/fonts/Lexend-VariableFont.ttf') format('truetype');
+
+
   }
+  
+  
 
 
   /*class về font chữ*/
 .text-poppins{
     font-family: 'Poppins';
   }
-  
-  .text-gilroy-bold{
-    font-family:'Gilroy-Bold' ;
-  }
-  
+    
   .text-missing-love{
     font-family: 'Missing-Love';
   }
@@ -47,7 +48,16 @@
   .text-gilroy{
     font-family: 'Gilroy';
   }
+
+.text-lexend{
+  font-family: 'Lexend';
+}
+
   
+
+.primary-bg{
+  background-color: #220297;
+}
 
 
 .text-purple{
