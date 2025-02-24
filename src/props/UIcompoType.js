@@ -18,7 +18,9 @@ const Container_PropTypes={
     flexType:PropTypes.string , //Row or col
     align:PropTypes.bool.isRequired, //Truyền true thì bật align center
     justify:PropTypes.bool.isRequired ,// Truyền true thì bật justify center
-    gap:PropTypes.string
+    gap:PropTypes.string,
+    padding:PropTypes.string,
+    otherStyle:PropTypes.string,
 }
 
 export {PrimaryButtonPropTypes,TitleText_PropTypes,Container_PropTypes}

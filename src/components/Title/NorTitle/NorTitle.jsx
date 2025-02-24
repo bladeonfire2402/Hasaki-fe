@@ -14,9 +14,7 @@ const NorTitle=({title,color, otherStyle})=>{
             if(title==item){
                 setIsBr(true)
             }
-        })
-     
-        
+        })   
     },[])
 
     return(

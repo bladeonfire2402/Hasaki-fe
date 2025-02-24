@@ -14,7 +14,7 @@ const HeaderMenu = () => {
   
   return (
     <div className="HeaderMenu-wrapper ">
-        <CustomContainer justify={true} gap={"gap-[20px]"} >
+        <CustomContainer justify={true} gap={"gap-[30px]"}  padding={"px-[50px]"}>
           {/** Menu Đăng nhập*/}
           <div className="flex items-center gap-2">
             <RoundedComponent icon={PersonIcon}/>

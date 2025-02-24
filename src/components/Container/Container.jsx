@@ -2,10 +2,10 @@
 import { Container_PropTypes } from "../../props/UIcompoType"
 
 // eslint-disable-next-line react/prop-types
-const CustomContainer = ({align,justify,children,bgColor,flexType,gap})=>{
+const CustomContainer = ({align,justify,children,bgColor,flexType,gap,padding, otherStyle})=>{
     return(
         <div className={`
-        flex px-[100px] ${flexType}  ${gap}  ${bgColor} py-7  ${align==true ? "items-center" :""} ${justify==true ? "justify-center" :""}`
+        flex ${padding} ${otherStyle} ${flexType}  ${gap}  ${bgColor} py-5  ${align==true ? "items-center" :""} ${justify==true ? "justify-center" :""}`
         }>
             {children}
         </div>

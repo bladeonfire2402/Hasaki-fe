@@ -12,7 +12,7 @@ const HeaderHasaki = () => {
   const [cartQuantity, setCartQuantity]= useState(0)
   return (
     <div className="Header-wrapper ">
-      <CustomContainer align={true} justify={true} bgColor={"primary-bg"}>
+      <CustomContainer align={true} justify={true} bgColor={"primary-bg"} padding={"px-[100px]"}>
        <div className="flex items-center w-full">
         <div className="Header-wrapper__LogoTitle flex w-fit mr-14">
           <img src="" className=""/>
