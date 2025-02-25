@@ -7,6 +7,11 @@
     color: rgb(114, 8, 227);
 }
 
+.secondary{
+    background-color: rgb(114, 8, 227);
+    color: white;
+}
+
 .zoom-effect:hover{
     transform: scale(1.05);
     transition: 0.5s ease-in-out;

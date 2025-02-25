@@ -58,7 +58,9 @@
 .primary-bg{
   background-color: #220297;
 }
-
+.secondary-bg{
+  background-color: #D9D0F8;
+}
 
 .text-purple{
   color: rgb(114, 8, 227);

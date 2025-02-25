@@ -1,8 +1,8 @@
 
 // eslint-disable-next-line react/prop-types
-const RoundedComponent = ({icon:Icon}) => {
+const RoundedComponent = ({icon:Icon, color, bg, size}) => {
   return (
-    <div className="px-2 py-2 border-2 text-white rounded-full flex justify-center">
+    <div className={`px-2 py-2 flex justify-center items-center border-2 ${color} ${bg} ${size} rounded-full flex justify-center `}>
       <Icon/>
     </div>
   )

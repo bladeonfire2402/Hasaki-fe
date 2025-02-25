@@ -11,13 +11,13 @@ import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 
 
 const HeaderMenu = () => {
-  
   return (
     <div className="HeaderMenu-wrapper ">
         <CustomContainer justify={true} gap={"gap-[30px]"}  padding={"px-[50px]"}>
+          
           {/** Menu Đăng nhập*/}
           <div className="flex items-center gap-2">
-            <RoundedComponent icon={PersonIcon}/>
+            <RoundedComponent icon={PersonIcon} color={"text-white"}/>
             <div className="Submenu">
              <NorTitle title={ClientMenu.AuthMenu.Login} color={"text-white"}/>
              <ContainerRow>
@@ -29,7 +29,7 @@ const HeaderMenu = () => {
 
           {/** Menu hệ thống cửa hàng*/}
           <div className="flex items-center gap-2">
-            <RoundedComponent icon={HouseIcon}/>
+            <RoundedComponent icon={HouseIcon} color={"text-white"}/>
             <div className="Submenu">
              <NorTitle title={ClientMenu.Store} color={"text-white"}/>
             
@@ -39,7 +39,7 @@ const HeaderMenu = () => {
 
            {/** Menu hệ thống hỗ trợ khách hàng*/}
            <div className="flex items-center gap-2">
-            <RoundedComponent icon={LocalPhoneIcon}/>
+            <RoundedComponent icon={LocalPhoneIcon} color={"text-white"}/>
             <div className="Submenu">
              <NorTitle title={ClientMenu.Help} color={"text-white"}/>
             </div>

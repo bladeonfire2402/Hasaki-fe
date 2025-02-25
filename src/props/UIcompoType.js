@@ -5,7 +5,17 @@ const PrimaryButtonPropTypes = {
     text: PropTypes.string.isRequired,  // Bắt buộc phải có text
     onClickfun: PropTypes.func,         // Không bắt buộc
     size: PropTypes.number,             // size phải là số nếu có truyền vào
+    otherStyle:PropTypes.str,
 };
+
+const SecondaryButtonPropTypes={
+    text: PropTypes.string.isRequired,  // Bắt buộc phải có text
+    onClickfun: PropTypes.func,         // Không bắt buộc
+    size: PropTypes.number,
+    otherStyle:PropTypes.str,
+    padding:PropTypes.string,
+    rounded:PropTypes.string,
+}
 
 const TitleText_PropTypes={
     title:PropTypes.string.isRequired,
@@ -23,4 +33,4 @@ const Container_PropTypes={
     otherStyle:PropTypes.string,
 }
 
-export {PrimaryButtonPropTypes,TitleText_PropTypes,Container_PropTypes}
+export {PrimaryButtonPropTypes,TitleText_PropTypes,Container_PropTypes,SecondaryButtonPropTypes}
