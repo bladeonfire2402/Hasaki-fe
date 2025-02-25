@@ -33,4 +33,13 @@ const Container_PropTypes={
     otherStyle:PropTypes.string,
 }
 
-export {PrimaryButtonPropTypes,TitleText_PropTypes,Container_PropTypes,SecondaryButtonPropTypes}
+
+
+const Heading_PropTypes={
+    title:PropTypes.string.isRequired, 
+    textSize:PropTypes.string,
+    textColor:PropTypes.string, 
+    otherEmphasis:PropTypes.string
+}
+
+export {PrimaryButtonPropTypes,TitleText_PropTypes,Container_PropTypes,SecondaryButtonPropTypes,Heading_PropTypes}

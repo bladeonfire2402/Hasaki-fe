@@ -66,6 +66,18 @@
   color: rgb(114, 8, 227);
 }
 
+.text-red{
+  color: #FF0909;
+}
+
+.text-gray{
+  color: #8a888f;
+}
+
+.text-blue{
+  color: #220297;
+}
+
 
 .over-hidden{
   overflow: hidden;

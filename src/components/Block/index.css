@@ -1,0 +1,29 @@
+.ProductBlock{
+    box-shadow: rgba(2, 4, 132, 0.2) 0px 2px 8px 0px;
+}
+
+.ProductBlock img:hover{
+    transform: scale(1.25);
+    transition: 0.5s ease-in-out;
+}
+
+.ProductBlock .ProductBlock_bg{
+    background-color: aqua;
+}
+
+.ProductBlock .hide{
+    overflow: hidden;
+}
+
+.DescriptionBlock {
+  
+}
+
+.CategoryBlock-wrapper .temporaly:hover{
+    transform: scale(1.05);
+    transition: 0.3s ease-in-out;
+}
+
+.ProductBlock__Main-wrapper {
+    background-color: white;
+}
