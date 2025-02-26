@@ -11,14 +11,12 @@ const Client_HomeScreen = ()=>{
               <div className="w-full">
                 <Banner/>
                 <HotSaleSection/>
-
                 <CategorySection/>                
               </div>
             </CustomContainer>
             <CustomContainer justify={true}>
               <SuggestionSection/>
             </CustomContainer>
-
         </div>
     )
 

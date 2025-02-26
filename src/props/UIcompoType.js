@@ -17,6 +17,17 @@ const SecondaryButtonPropTypes={
     rounded:PropTypes.string,
 }
 
+const CustomButtonPropTypes={
+    text: PropTypes.string.isRequired,  // Bắt buộc phải có text
+    onClickfun: PropTypes.func,         // Không bắt buộc
+    size: PropTypes.number,
+    otherStyle:PropTypes.str,
+    padding:PropTypes.string,
+    rounded:PropTypes.string,
+    bgColor:PropTypes.string,
+    color:PropTypes.string,
+}
+
 const TitleText_PropTypes={
     title:PropTypes.string.isRequired,
     color:PropTypes.string,
@@ -42,4 +53,4 @@ const Heading_PropTypes={
     otherEmphasis:PropTypes.string
 }
 
-export {PrimaryButtonPropTypes,TitleText_PropTypes,Container_PropTypes,SecondaryButtonPropTypes,Heading_PropTypes}
+export {PrimaryButtonPropTypes,TitleText_PropTypes,Container_PropTypes,SecondaryButtonPropTypes,Heading_PropTypes,CustomButtonPropTypes}
