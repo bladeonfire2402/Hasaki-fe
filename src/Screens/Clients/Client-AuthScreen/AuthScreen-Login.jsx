@@ -1,8 +1,53 @@
+import { useState } from 'react';
 import PrimaryButton from '../../../Components/Buttons/Primary_Button/PrimaryButton.jsx'
 import './Auth.css'
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"
+import { useNavigate } from "react-router"; 
 
 
 const AuthScreen_Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error,setError]=useState("")
+  const [loading,setLoading]=useState("")
+
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+    
+    try {
+        const loginUrl = import.meta.env.VITE_API_ENDPOINT_LOGIN;
+        if (!loginUrl) {
+            throw new Error("API endpoint is not defined");
+        }
+        console.log(loginUrl)
+        const response = await fetch(loginUrl, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ email: email, pwd: password })
+        });
+        
+        const text = await response.text();
+        const data = text ? JSON.parse(text) : {};
+        
+        if (!response.ok) {
+            throw new Error(data.message || "Login failed");
+        }
+        
+        console.log("Login successful", data);
+        // Xử lý lưu token hoặc điều hướng
+    } catch (err) {
+        console.error("Error:", err);
+        setError(err.message);
+    } finally {
+        setLoading(false);
+    }
+};
   return (
     <div className="AuthScreen_Login-wrapper h-full">
       <div className="AuthScreen-wrapper flex justify-center h-full py-16">
@@ -11,11 +56,18 @@ const AuthScreen_Login = () => {
              <div className="AuthScreen__BoxContent-SignIn ">
               <h1 className="text-5xl text-white text-gilroy ">Sign In</h1>
               <div className="mt-8 flex flex-col gap-[20px]">
-               <input type="email" className="px-6 py-2 rounded-md text-poppins w-[320px]" placeholder="Enter your email"></input>
-               <input type="password" className="px-6 py-2 rounded-md text-poppins  w-[320px]" placeholder="Enter your password" ></input>
+               <input type="email" className="px-6 py-2 rounded-md text-poppins w-[320px]" placeholder="Enter your email"
+               required
+               value={email}
+               onChange={(e)=>{setEmail(e.target.value)}}
+               ></input>
+               <input type="password" className="px-6 py-2 rounded-md text-poppins  w-[320px]" placeholder="Enter your password"
+               value={password}
+               onChange={(e)=>{setPassword(e.target.value)}}
+               ></input>
               </div>
               <h2 className="text-poppins text-white mt-[20px] mb-[20px]">Forgot password ?</h2>
-              <PrimaryButton text={"Sign In"}/>
+              <PrimaryButton text={"Sign In"} onClickfun={handleLogin}/>
               <h2 className='text-poppins text-white mt-[20px] mb-[20px] '>Dont have account ? 
                 <b className=' text-[16px] cursor-pointer ml-2'>Register now !</b></h2>
              </div>

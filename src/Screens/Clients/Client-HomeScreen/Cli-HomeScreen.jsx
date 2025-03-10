@@ -1,10 +1,16 @@
+import { useContext } from "react"
 import Banner from "../../../Components/Banner/Banner"
 import CustomContainer from "../../../Components/Container/Container"
 import CategorySection from "../../../Components/HomeScreenCompo/CategorySection/CategorySection"
 import HotSaleSection from "../../../Components/HomeScreenCompo/HotSaleSection/HotSaleSection"
 import SuggestionSection from "../../../Components/HomeScreenCompo/SuggestionSection/SuggestionSection"
+import { ClientContext } from "../../../Context/clientContex"
+
 
 const Client_HomeScreen = ()=>{
+    const {productList}=useContext(ClientContext)
+
+
     return(
         <div className="Client_HomeScreen">
             <CustomContainer justify={true} padding={"px-[100px]"}>
@@ -15,7 +21,7 @@ const Client_HomeScreen = ()=>{
               </div>
             </CustomContainer>
             <CustomContainer justify={true}>
-              <SuggestionSection/>
+              <SuggestionSection productList={productList}/>
             </CustomContainer>
         </div>
     )
