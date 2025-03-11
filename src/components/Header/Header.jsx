@@ -7,9 +7,11 @@ import LargetTitle from "../Title/LgTitle/LargeTitle"
 import { useState } from "react";
 
 
+
 const HeaderHasaki = () => {
   // eslint-disable-next-line no-unused-vars
   const [cartQuantity, setCartQuantity]= useState(0)
+  
   return (
     <div className="Header-wrapper ">
       <CustomContainer align={true} justify={true} bgColor={"primary-bg"} padding={"px-[100px] py-6"}>

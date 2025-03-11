@@ -10,6 +10,7 @@ const ClientContextProvider = ({children}) => {
     const [productList, setproductList] = useState();
     const [proError, setproError] = useState();
     const [categoryList,setcategoryList]=useState()
+    const [user,setUser]=useState("")
 
     const getProductList = async () => {
         const getProductUrl = import.meta.env.VITE_API_ENDPOINT_GETPRODUCT;
@@ -32,6 +33,43 @@ const ClientContextProvider = ({children}) => {
         }
     };
 
+    const getTokenAndUser = async () => {
+        const getUserInfo = import.meta.env.VITE_API_ENDPOINT_GETUSERINFO;
+        const token = localStorage.getItem("token");
+    
+        if (token) {
+            try {
+                // Gửi token qua query parameters trong GET request
+                const response = await axios.get(getUserInfo, {
+                    params: {
+                        token: token,  // Token được gửi qua query parameter 'token'
+                    }
+                });
+    
+                if (response.status === 200) {
+                    console.log("User data:", response.data.user);
+                    setUser(response.data.user);
+                    setcliToken(token)
+                }
+            } catch (e) {
+                console.log("Error:", e.response ? e.response.data : e.message);
+            }
+        } else {
+            console.log("No token found");
+        }
+    };
+
+    
+    
+    
+    
+
+    const getCart = async()=>{
+        
+    }
+
+    
+
     const contextValue = {
         clitoken,
         setcliToken,
@@ -41,8 +79,10 @@ const ClientContextProvider = ({children}) => {
     };
 
     useEffect(() => {
+        getTokenAndUser();
         getProductList(); // Lấy danh sách sản phẩm khi component mount
         getCategoriesList();
+
     }, []);
     
     return (

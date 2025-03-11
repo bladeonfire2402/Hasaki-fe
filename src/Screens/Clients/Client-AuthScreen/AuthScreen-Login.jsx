@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import PrimaryButton from '../../../Components/Buttons/Primary_Button/PrimaryButton.jsx'
 import './Auth.css'
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"
 import { useNavigate } from "react-router"; 
+import { ClientContext } from '../../../Context/clientContex.jsx';
 
 
 const AuthScreen_Login = () => {
@@ -11,7 +12,8 @@ const AuthScreen_Login = () => {
   const [password, setPassword] = useState("");
   const [error,setError]=useState("")
   const [loading,setLoading]=useState("")
-
+  const navigateToMain= useNavigate()
+  const {setcliToken}=useContext(ClientContext)
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -23,7 +25,7 @@ const AuthScreen_Login = () => {
         if (!loginUrl) {
             throw new Error("API endpoint is not defined");
         }
-        console.log(loginUrl)
+       
         const response = await fetch(loginUrl, {
             method: "POST",
             headers: {
@@ -36,10 +38,19 @@ const AuthScreen_Login = () => {
         const data = text ? JSON.parse(text) : {};
         
         if (!response.ok) {
-            throw new Error(data.message || "Login failed");
+          toast.error(data.message || "login failed")
+          throw new Error(data.message)
+        }
+        else{
+          toast.success(data.message)
+          setcliToken(data.accessToken)
+          localStorage.setItem("token", data.accessToken);
+          setTimeout(()=>{
+            navigateToMain('/')
+          },3000)
         }
         
-        console.log("Login successful", data);
+        
         // Xử lý lưu token hoặc điều hướng
     } catch (err) {
         console.error("Error:", err);
@@ -50,6 +61,7 @@ const AuthScreen_Login = () => {
 };
   return (
     <div className="AuthScreen_Login-wrapper h-full">
+      <ToastContainer/>
       <div className="AuthScreen-wrapper flex justify-center h-full py-16">
          <div className="AuthScreen__BoxContent rounded-[40px] w-1/2 shadow-2xs flex justify-center items-center ">
            <div className=" flex gap-[140px]">

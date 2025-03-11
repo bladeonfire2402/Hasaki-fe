@@ -17,7 +17,7 @@ const CategorySection = () => {
         otherEmphasis={"font-bold mb-1"}
         />
 
-        <DisplayContainer padding={"py-7"}>
+        <DisplayContainer padding={"py-7"} otherStyles={"justify-between"}>
             {CategoryList.map((category)=>(
                 <CategoryBlock category={category} key={category}/>
             ))}

@@ -13,7 +13,7 @@ const HotSaleSection = () => {
         textSize={"text-3xl"}
         otherEmphasis={"font-bold mb-1"}
         />
-        <DisplayContainer padding={"py-7"}>
+        <DisplayContainer padding={"py-7"} otherStyles={"justify-between"}>
           {ProductData.map((product)=>(
             <ProductBlock__HotSale product={product} key={product.id}/>
           ))}

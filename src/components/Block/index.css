@@ -7,6 +7,8 @@
     transition: 0.5s ease-in-out;
 }
 
+
+
 .ProductBlock .ProductBlock_bg{
     background-color: aqua;
 }
@@ -26,4 +28,9 @@
 
 .ProductBlock__Main-wrapper {
     background-color: white;
+}
+
+
+.ProductBlock__Main_img {
+    width: 50px;
 }
