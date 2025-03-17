@@ -28,6 +28,7 @@
 
 .ProductBlock__Main-wrapper {
     background-color: white;
+    max-width: 250px;
 }
 
 

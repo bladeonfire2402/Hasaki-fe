@@ -18,12 +18,14 @@
     "@mui/material": "^6.4.5",
     "@tailwindcss/vite": "^4.0.8",
     "axios": "^1.8.2",
+    "chart.js": "^4.4.8",
     "dotenv": "^16.4.7",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router": "^7.1.5",
     "react-router-dom": "^7.1.5",
-    "react-toastify": "^11.0.3"
+    "react-toastify": "^11.0.3",
+    "swiper": "^11.2.5"
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",

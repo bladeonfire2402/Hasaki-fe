@@ -13,9 +13,11 @@ const Client_HomeScreen = ()=>{
 
     return(
         <div className="Client_HomeScreen">
+           <div className="flex ">
+            <Banner/>
+           </div>
             <CustomContainer justify={true} padding={"px-[100px]"}>
               <div className="w-full">
-                <Banner/>
                 <HotSaleSection/>
                 <CategorySection/>                
               </div>

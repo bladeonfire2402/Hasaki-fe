@@ -31,12 +31,24 @@ const AdminContextProvider = ({children}) => {
         }
     };
 
+    const deleteProduct = async ()=>{
+        const deleteUrl = import.meta.env.VITE_API_ENDPOINT_DELETEPRODUCT;
+        try{
+            const response= await axios.delete(deleteUrl);
+        }
+        catch(e){
+            console.log(e)
+        }
+
+    }
+
     const contextValue = {
         adtoken,
         setadToken,
         productList,
         proError,
-        categoryList
+        categoryList,
+        deleteProduct,
     };
 
     useEffect(() => {

@@ -32,6 +32,8 @@
 
 
   }
+
+
   
   
 
@@ -81,4 +83,11 @@
 
 .over-hidden{
   overflow: hidden;
+}
+
+.middle{
+  top:50%;
+  transform: translateY(-50%);
+  
+
 }

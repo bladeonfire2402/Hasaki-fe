@@ -1,10 +1,14 @@
-import { ProductData } from "../../../assets/data/ProductData"
+
 import DisplayContainer from "../../Container/DisplayContainer"
 import ProductBlock__HotSale from "../../Block/ProductBlock__HotSale"
 import Heading from "../../Title/Heading/Heading"
+import { useContext } from "react"
+import { ClientContext } from "../../../Context/clientContex"
 
 
 const HotSaleSection = () => {
+  const {productList}=useContext(ClientContext)
+  
   return (
     <div className="HotSaleSection-wrapper">
         <Heading 
@@ -13,11 +17,14 @@ const HotSaleSection = () => {
         textSize={"text-3xl"}
         otherEmphasis={"font-bold mb-1"}
         />
-        <DisplayContainer padding={"py-7"} otherStyles={"justify-between"}>
-          {ProductData.map((product)=>(
+        {
+          !productList?<div></div>:
+        <DisplayContainer padding={"py-7"} otherStyles={"gap-5"}>
+          {productList.slice(0,8).map((product)=>(
             <ProductBlock__HotSale product={product} key={product.id}/>
           ))}
         </DisplayContainer>
+        }
 
     </div>
   )

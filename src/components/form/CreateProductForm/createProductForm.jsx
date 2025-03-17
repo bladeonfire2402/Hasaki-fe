@@ -1,7 +1,8 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import axios from 'axios';
 import { adminContext } from '../../../Context/adminContext';
 import Spinner from '../../spinner/spinner';
+import { toast } from 'react-toastify';
 
 const CreateProductForm = () => {
   const { categoryList } = useContext(adminContext);
@@ -11,6 +12,7 @@ const CreateProductForm = () => {
     description: '',
     price: '',
     category: '',
+    status:'Active',
     image: null,
   });
 
@@ -52,8 +54,26 @@ const CreateProductForm = () => {
           'Content-Type': 'multipart/form-data',
         },
       });
+
+      
+      toast.success("Tạo sản phẩm thành công")
       console.log('Product created successfully:', response.data);
+
+      
+
+      const empty={
+        name: '',
+        description: '',
+        price: '',
+        category: '',
+        status:'Active',
+        image: null,
+      }
+
+      setProduct(empty)
+
     } catch (error) {
+      toast.error("Tạo sản phẩm thất bại")
       console.error('Error creating product:', error);
     }
   };

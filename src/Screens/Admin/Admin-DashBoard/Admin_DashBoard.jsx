@@ -1,20 +1,22 @@
 import { Route, Routes } from "react-router"
 import SideBar from "../../../Components/SideBar/SideBar"
 import Ad_Product from "../Admin-Product/Ad_Product"
-import { useState } from "react"
+import Ad_Client from "../Admin-Client/Ad_Client"
+import Ad_Order from "../Admin-Order/Ad_Order"
+import Ad_Categories from "../Admin-Categories/Ad_Categories"
+
+
 
 const Admin_DashBoard = () => {
-  const [manageTitle,setmanageTitle]= useState("Product")
   return (
-    <div className="Admin_DashBoard-wrapper flex ">
+    <div className="Admin_DashBoard-wrapper flex h-full">
         <SideBar/>
         <div className="Dashboard w-full">
-            <div className="flex justify-center items-center  primary-bg py-5">
-                <h1 className="text-poppins text-4xl text-white uppercase font-bold">LUNAXI {manageTitle}</h1>
-            </div>
             <Routes>
                 <Route path="/product" element={<Ad_Product/>}/>
-                <Route path="/user"/>
+                <Route path="/user" element={<Ad_Client/>}/>
+                <Route path="/order" element={<Ad_Order/>}/>
+                <Route path="/category" element={<Ad_Categories/>}/>
             </Routes>
         </div>
 
