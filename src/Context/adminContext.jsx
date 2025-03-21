@@ -6,9 +6,11 @@ export const adminContext = createContext(null);
 // eslint-disable-next-line react/prop-types
 const AdminContextProvider = ({children}) => {
     const [adtoken, setadToken] = useState("");
+    const [userList,setUserList]=useState('')
     const [productList, setproductList] = useState();
     const [proError, setproError] = useState();
     const [categoryList,setcategoryList]=useState()
+    const [reload,setReload]=useState(false)
 
     const getProductList = async () => {
         const getProductUrl = import.meta.env.VITE_API_ENDPOINT_GETPRODUCT;
@@ -24,7 +26,7 @@ const AdminContextProvider = ({children}) => {
         const getCategoriesUrl = import.meta.env.VITE_API_ENDPOINT_GETCATEGORIES;
         try {
             const response = await axios.get(getCategoriesUrl);
-            setcategoryList(response.data.categories); // Cập nhật trạng thái sản phẩm
+            setcategoryList(response.data.categories); // Cập nhật categories list
             
         } catch (e) {
             console.log(e)
@@ -42,6 +44,21 @@ const AdminContextProvider = ({children}) => {
 
     }
 
+    const getUserList = async () => {
+        const getUsersListUrl = import.meta.env.VITE_API_ENDPOINT_GETUSERSALL;
+        try {
+            const response = await axios.get(getUsersListUrl);
+
+            setUserList(response.data.users)
+           
+        } catch (e) {
+            setproError(e)
+        }
+    };
+
+
+
+
     const contextValue = {
         adtoken,
         setadToken,
@@ -49,12 +66,16 @@ const AdminContextProvider = ({children}) => {
         proError,
         categoryList,
         deleteProduct,
+        userList,
+        setReload,
+        reload  
     };
 
     useEffect(() => {
         getProductList(); // Lấy danh sách sản phẩm khi component mount
         getCategoriesList();
-    }, []);
+        getUserList();
+    }, [reload]);
     
     return (
         <adminContext.Provider value={contextValue}>

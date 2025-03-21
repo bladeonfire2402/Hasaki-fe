@@ -12,7 +12,7 @@ import ClientContextProvider from './Context/clientContex'
 
 function App() {
   return (
-    <div className='app h-screen'>
+    <div className='app '>
       <ToastContainer/>
       <ClientContextProvider>
         <Routes>

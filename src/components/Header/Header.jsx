@@ -5,6 +5,7 @@ import RoundedComponent from "../RounedComponent/RounedComponent"
 import SearchBar from "../Searchbar/SearchBar"
 import LargetTitle from "../Title/LgTitle/LargeTitle"
 import { useState } from "react";
+import imgData from "../../../public/assets/data/imgData";
 
 
 
@@ -17,8 +18,8 @@ const HeaderHasaki = () => {
       <CustomContainer align={true} justify={true} bgColor={"primary-bg"} padding={"px-[100px] py-6"}>
        <div className="flex items-center w-full justify-between">
         <div className="Header-wrapper__LogoTitle flex w-fit mr-14">
-          <img src="" className=""/>
-          <LargetTitle title={"Lunaxi"} color={"text-white"} otherStyle={"uppercase"}/>
+          <img src={imgData.logoBruh} className="w-[170px]"/>
+          
         </div>
         {/**Phần thanh tìm kiếm */}
         <SearchBar/>

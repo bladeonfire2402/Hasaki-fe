@@ -123,7 +123,7 @@ const CreateCategoryForm = () => {
             type="submit"
             className="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700"
           >
-            Tạo danh mục
+            Cập nhật danh mục
           </button>
         </form>
       )}

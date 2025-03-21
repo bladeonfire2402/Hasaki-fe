@@ -17,7 +17,7 @@ const AuthScreen_VerifyEmail = () => {
     e.preventDefault();
     setError(null);
 
-    const verifyUrl = "https://your-api.com/verify"; // Thay bằng API thực tế
+    const verifyUrl = import.meta.env.VITE_API_ENDPOINT_VERIFYEMAIL; // Thay bằng API thực tế
 
     if (!email || !verifyCode) {
       setError("Vui lòng nhập đầy đủ thông tin");
@@ -42,8 +42,12 @@ const AuthScreen_VerifyEmail = () => {
         return;
       }
 
+      
       toast.success("Xác thực tài khoản thành công");
-      navigateToLogin("/auth/login");
+
+      setTimeout(()=>{
+        navigateToLogin("/auth/login");
+      },5000)
 
     } catch (err) {
       setError(err||"Có lỗi xảy ra, vui lòng thử lại");

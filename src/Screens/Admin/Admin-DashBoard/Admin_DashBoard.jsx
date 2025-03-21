@@ -7,9 +7,10 @@ import Ad_Categories from "../Admin-Categories/Ad_Categories"
 
 
 
+
 const Admin_DashBoard = () => {
   return (
-    <div className="Admin_DashBoard-wrapper flex h-full">
+    <div className="Admin_DashBoard-wrapper flex h-full min-height-1000">
         <SideBar/>
         <div className="Dashboard w-full">
             <Routes>
@@ -17,6 +18,7 @@ const Admin_DashBoard = () => {
                 <Route path="/user" element={<Ad_Client/>}/>
                 <Route path="/order" element={<Ad_Order/>}/>
                 <Route path="/category" element={<Ad_Categories/>}/>
+               
             </Routes>
         </div>
 

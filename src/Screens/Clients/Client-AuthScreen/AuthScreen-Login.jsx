@@ -5,7 +5,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"
 import { useNavigate } from "react-router"; 
 import { ClientContext } from '../../../Context/clientContex.jsx';
-
+import { Link } from 'react-router';
 
 const AuthScreen_Login = () => {
   const [email, setEmail] = useState("");
@@ -14,6 +14,7 @@ const AuthScreen_Login = () => {
   const [loading,setLoading]=useState("")
   const navigateToMain= useNavigate()
   const {setcliToken}=useContext(ClientContext)
+  const navigateToRes= useNavigate()
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -45,6 +46,7 @@ const AuthScreen_Login = () => {
           toast.success(data.message)
           setcliToken(data.accessToken)
           localStorage.setItem("token", data.accessToken);
+          
           setTimeout(()=>{
             navigateToMain('/')
           },3000)
@@ -81,7 +83,7 @@ const AuthScreen_Login = () => {
               <h2 className="text-poppins text-white mt-[20px] mb-[20px]">Forgot password ?</h2>
               <PrimaryButton text={"Sign In"} onClickfun={handleLogin}/>
               <h2 className='text-poppins text-white mt-[20px] mb-[20px] '>Dont have account ? 
-                <b className=' text-[16px] cursor-pointer ml-2'>Register now !</b></h2>
+                <Link to={'/auth/register'}><b className=' text-[16px] cursor-pointer ml-2'>Register now !</b></Link></h2>
              </div>
              <div className='flex items-center flex-col ml-[-10px]'>
                <div className="text-missing-love text-6xl text-purple text-center">Welcome back</div>

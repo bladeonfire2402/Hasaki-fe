@@ -14,10 +14,12 @@ import InfoIcon from '@mui/icons-material/Info';
 
 const Ad_Client = () => {
 
-  const {productList} = useContext(adminContext) // List sản phẩm
+  const {userList} = useContext(adminContext) // List sản phẩm
   const [create,setCreate]=useState(false)
   const optionValue=["Xem 5 user","Xem 7 user"]
   const sortList = ["Mặc định","Ngày tạo mới nhất","Theo tên a-z"]
+
+  console.log(userList)
   
   
   return (
@@ -50,14 +52,7 @@ const Ad_Client = () => {
                   <SearchIcon/>
                </div>
               </div>
-              <div className="w-full text-lexend mt-5 font-semibold">
-                <h2 className="text-white mb-2">Tùy chọn hiển thị</h2>
-                <select className="w-full px-2 py-2 rounded-md ">
-                  {optionValue.map((option)=>(
-                    <option className="px-2 py-2 rounded-none" key={option}>{option}</option>
-                  ))}
-                </select>
-              </div>
+              
             </div>
             <div className="w-1/3">
               <h1 className="text-white mb-2 text-lexend font-semibold">Sắp xếp theo</h1>
@@ -68,29 +63,17 @@ const Ad_Client = () => {
                   ))}
                 </select>
               </div>
-
-              <h1 className="text-white mb-2 text-lexend font-semibold mt-5">Lọc theo danh mục</h1>
-              <div className="w-full text-lexend font-semibold">
-                <select className="w-full px-2 py-2 rounded-md ">
-                  {optionValue.map((option)=>(
-                    <option className="px-2 py-2 rounded-none" key={option}>{option}</option>
-                  ))}
-                </select>
-              </div>
             </div>
-
-            
         </div>
         {create==false?<></>:<div className="w-full h-full  absolute top-0  bg-gray-200 "><CreateProductForm/></div>}
-        {!productList?
+        {!userList?
             <div className="loading"><Spinner/></div>
             :       
             <div className="Ad_Product-Result rounded-md overflow-hidden my-3 mx-3">
-            <div className="grid grid-cols-9 items-cente bg-black text-white text-lexend  px-9 py-2">
+            <div className="grid grid-cols-8 items-cente bg-black text-white text-lexend  px-9 py-2">
                 <h2>STT</h2>
                 <h2>Họ Tên</h2>
-                <h2>Ảnh Đại diện</h2>
-                <h2>Email</h2>
+                <h2 className="">Email</h2>
                 <h2>Số điện thoai</h2>
                 <h2>Trạng thái</h2>
                 <h2>Xác thực</h2>
@@ -98,16 +81,16 @@ const Ad_Client = () => {
                 <h2>Thao tác</h2>
             </div>
 
-            {productList.map((product,index)=>(
-                <div key={product._id} className="grid grid-cols-9  text-black text-lexend border-2 px-9 py-5">
+            {userList.map((user,index)=>(
+                <div key={user._id} className="grid grid-cols-8  text-black text-lexend border-2 px-9 py-5">
                   <h2>{index+1}</h2>
-                 <h2>{product.productName}</h2>
-                 <img className="w-[70px] h-[70px]" src={product.imageUrl}/>
-                 <h2>{product.description}</h2>
-                 <h2>{product.categoryId.name}</h2>
-                 <div>{product.status || <div className="">Active</div>}</div>
-                 <h2>{product.price}</h2>
-                 <h2>{cutDate(product.createdAt)}</h2>
+                 <h2>{user.fullname}</h2>
+                 
+                 <h2 className="[line-break:anywhere]">{user.email}</h2>
+                 <h2>{user.phone}</h2>
+                 <div>{user.status || <div className="">Active</div>}</div>
+                 <h2>{user.verified==false ? "Chưa xác thực" :"Đã xác thực"}</h2>
+                 <h2>{cutDate(user.createdAt)}</h2>
                  <div className="flex gap-2 ">
                   <div className="flex justify-center items-center py-2  h-fit rounded-md px-2 bg-red-500  "><DeleteIcon style={{ color: 'white', fontSize: 20 }} /></div>
                   <div className="flex justify-center items-center py-2  h-fit rounded-md px-2 bg-blue-500  "><UpgradeIcon style={{ color: 'white', fontSize: 20 }} /></div>   

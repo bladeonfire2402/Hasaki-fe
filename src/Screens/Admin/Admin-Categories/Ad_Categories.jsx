@@ -10,14 +10,30 @@ import ImportExportIcon from '@mui/icons-material/ImportExport';
 import InfoIcon from '@mui/icons-material/Info';
 import CategoryIcon from '@mui/icons-material/Category';
 import CreateCategoryForm from "../../../Components/form/CreateCategoryForm/createCategoryForm";
+import { useNavigate } from "react-router";
+import UpdateCategoryForm from "../../../Components/form/UpdateCategoryForm/UpdateCategoryForm";
+
 
 
 const Ad_Categories = () => {
+  const navigate=useNavigate()
 
   const {categoryList} = useContext(adminContext) // List sản phẩm
   const [create,setCreate]=useState(false)
+  const [update,setUpdate]=useState(false)
+  const [currentCate,setcurrentCate]=useState('')
+
+  const handleUpdate = (category)=>{
+    setUpdate(!update)
+    setcurrentCate(category)
+  }
+
   const optionValue=["Xem 5 danh mục","Xem 7 danh mục"]
   const sortList = ["Mặc định","Theo tên a-z","Theo số sản phẩm trong danh mục"]
+
+
+
+
   
   
   return (
@@ -30,7 +46,7 @@ const Ad_Categories = () => {
         <div className="w-1/3 text-lexend text-md">
             <h1 className="text-white mb-2 text-lexend font-semibold">Thao tác</h1>
             <div className="flex  gap-2">
-              <div className="flex gap-1 text-white justify-center text-lexend h-fit bg-blue-500 px-2 py-2 rounded-md" onClick={()=>{setCreate(!create)}}>
+              <div className="flex gap-1 text-white justify-center text-lexend h-fit bg-blue-500 px-2 py-2 rounded-md cursor-pointer" onClick={()=>{setCreate(!create)}}>
                 <AddCircleIcon/>
                 <p>Thêm danh mục</p>
               </div>
@@ -49,14 +65,7 @@ const Ad_Categories = () => {
                   <SearchIcon/>
                </div>
               </div>
-              <div className="w-full text-lexend mt-5 font-semibold">
-                <h2 className="text-white mb-2">Tùy chọn hiển thị</h2>
-                <select className="w-full px-2 py-2 rounded-md ">
-                  {optionValue.map((option)=>(
-                    <option className="px-2 py-2 rounded-none" key={option}>{option}</option>
-                  ))}
-                </select>
-              </div>
+             
             </div>
             <div className="w-1/3">
               <h1 className="text-white mb-2 text-lexend font-semibold">Sắp xếp theo</h1>
@@ -67,20 +76,12 @@ const Ad_Categories = () => {
                   ))}
                 </select>
               </div>
-
-              <h1 className="text-white mb-2 text-lexend font-semibold mt-5">Lọc theo</h1>
-              <div className="w-full text-lexend font-semibold">
-                <select className="w-full px-2 py-2 rounded-md ">
-                  {optionValue.map((option)=>(
-                    <option className="px-2 py-2 rounded-none" key={option}>{option}</option>
-                  ))}
-                </select>
-              </div>
             </div>
 
             
         </div>
         {create==false?<></>:<div className="w-full h-full  absolute top-0  bg-gray-200 "><CreateCategoryForm/></div>}
+        {update==false?<></>:<div className="w-full h-full  absolute top-0  bg-gray-200 "><UpdateCategoryForm product={currentCate}/></div>}
         {!categoryList?
             <div className="loading"><Spinner/></div>
             :       
@@ -102,8 +103,8 @@ const Ad_Categories = () => {
                  <h2 className="">{product.product.length}</h2>
                  <h2>{cutDate(product.createdAt)}</h2>
                  <div className="flex gap-2 ">
-                  <div className="flex justify-center items-center py-2  h-fit rounded-md px-2 bg-red-500  "><DeleteIcon style={{ color: 'white', fontSize: 20 }} /></div>
-                  <div className="flex justify-center items-center py-2  h-fit rounded-md px-2 bg-blue-500  "><UpgradeIcon style={{ color: 'white', fontSize: 20 }} /></div>   
+                  <div className="flex justify-center items-center py-2  h-fit rounded-md px-2 bg-red-500" ><DeleteIcon style={{ color: 'white', fontSize: 20 }} /></div>
+                  <div className="flex justify-center items-center py-2  h-fit rounded-md px-2 bg-blue-500" onClick={()=>{handleUpdate(product)}}><UpgradeIcon style={{ color: 'white', fontSize: 20 }} /></div>   
                   <div className="flex justify-center items-center py-2  h-fit rounded-md px-2 bg-green-500  "><InfoIcon style={{ color: 'white', fontSize: 20 }} /></div>                                     
                 </div>
                 </div>

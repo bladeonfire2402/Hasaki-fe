@@ -12,6 +12,7 @@ const AuthScreen_Register = () => {
   const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const navigateToLog= useNavigate()
   const navigateToVerify= useNavigate()
 
   const handleRegister = async (e) => {
@@ -43,7 +44,9 @@ const AuthScreen_Register = () => {
       toast.success("Đăng kí thành công")
 
       //Chuyển đến trang xác nhận
-      navigateToVerify("/auth/verifypwd")
+      setTimeout(()=>{
+        navigateToVerify("/auth/verifypwd")
+      },3000)
       
     } catch (err) {
       setError(err.message);
@@ -101,7 +104,7 @@ const AuthScreen_Register = () => {
               />
               <h2 className="text-poppins text-white mt-[20px] mb-[20px]">
                 Already have an account?
-                <b className="text-[16px] cursor-pointer ml-2">Login now!</b>
+                <b className="text-[16px] cursor-pointer ml-2" onClick={()=>{navigateToLog('/auth/login')}}>Login now!</b>
               </h2>
             </div>
             <div className="flex items-center flex-col ml-[-10px]">

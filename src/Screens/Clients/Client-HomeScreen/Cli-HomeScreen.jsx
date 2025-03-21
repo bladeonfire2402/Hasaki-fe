@@ -10,7 +10,6 @@ import { ClientContext } from "../../../Context/clientContex"
 const Client_HomeScreen = ()=>{
     const {productList}=useContext(ClientContext)
 
-
     return(
         <div className="Client_HomeScreen">
            <div className="flex ">
@@ -22,7 +21,7 @@ const Client_HomeScreen = ()=>{
                 <CategorySection/>                
               </div>
             </CustomContainer>
-            <CustomContainer justify={true}>
+            <CustomContainer justify={true} otherStyle={""}>
               <SuggestionSection productList={productList}/>
             </CustomContainer>
         </div>
