@@ -60,26 +60,32 @@
   
 
 .primary-bg{
-  background-color: #220297;
+  background-color: #FF6F61   ;
 }
 .secondary-bg{
   background-color: #D9D0F8;
 }
 
-.text-purple{
-  color: rgb(114, 8, 227);
-}
+
 
 .text-red{
   color: #FF0909;
 }
 
 .text-gray{
-  color: #8a888f;
+  color: #777777;
 }
 
 .text-blue{
-  color: #220297;
+  color: #333333;
+}
+
+.text-orange{
+  color: #FF6F61;
+}
+
+.secondaryBruh-bg{
+  background-color: #FFCB77 ;
 }
 
 

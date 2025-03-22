@@ -1,6 +1,6 @@
 
 const SearchBar_Suggestion = () => {
-    const suggesItemList = ["Kem chống nắng", "Tẩy trang", "Tonner", "Sửa rửa mặt", "Tẩy tế bào"]
+    const suggesItemList = ["Quần Denim", "Áo khoác ", "Hoodie", "Quần tây", "Váy ngắn"]
 
   return (
     <div className="flex  text-sm text-white text-lexend justify-between">

@@ -2,6 +2,7 @@
 
 // eslint-disable-next-line react/prop-types
 const DeletePopsup = ({deleteFunc,ondelete,setDelete}) => {
+  
   return (
     <div className='mx-auto w-1/3 p-6 bg-white shadow-lg rounded-md mt-[200px] flex flex-col items-center shadow-md'>
         <h2 className="text-xl mb-4 text-lexend font-semibold">Xác nhận xóa sản phẩm</h2>

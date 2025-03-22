@@ -9,7 +9,7 @@ import NorTitle from "../Title/NorTitle/NorTitle"
 
 const FooterHasaki = () => {
     return (
-      <CustomContainer align={true} justify={true} bgColor={"secondary-bg"} padding={"py-[30px] px-[100px] flex-col"} >
+      <CustomContainer align={true} justify={true} bgColor={"primary-bg"} padding={"py-[30px]  px-[100px] flex-col"} >
         <CustomContainer  otherStyle={"w-full justify-between"}  >
           <div className="flex flex-col mt-7 gap-1">
             {Object.entries(FooterLine.FirtstSection).map(([key,value])=>(

@@ -10,7 +10,7 @@ const CategoryBlock = ({category}) => {
   const checkCategoryProduct = ()=>{
      if(category.product.length!=0){
        const product = category.product[0]
-       console.log(product.imageUrl)
+
        const productImg=product.imageUrl
        return productImg
      }

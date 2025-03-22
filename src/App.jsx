@@ -21,6 +21,7 @@ function App() {
           <Route path='/auth/login' element={<AuthScreen_Login/>}/>
           <Route path='/auth/register' element={<AuthScreen_Register/>}/>
           <Route path='/auth/verifypwd' element={<AuthScreen_VerifyEmail/>}/>
+          
         </Routes>
       </ClientContextProvider>
     </div>

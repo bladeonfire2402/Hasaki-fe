@@ -9,7 +9,7 @@ const ClientMenu = {
         Account:"Tài khoản"
       }
     },
-    Store:"M",
+    Store:"Mua sắm ngay",
     Help:"Hỗ trợ khách hàng"
 }
 
