@@ -24,8 +24,6 @@ const Client_HomeScreen = ()=>{
             <CustomContainer justify={true} otherStyle={""}>
               <SuggestionSection productList={productList}/>
             </CustomContainer>
-
-            
         </div>
     )
 

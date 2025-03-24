@@ -5,7 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import './index.css';
 import { useNavigate } from "react-router";
 import { ClientContext } from "../../Context/clientContex";
-
+import VisibilityIcon from '@mui/icons-material/Visibility';
 // eslint-disable-next-line react/prop-types
 const ProductBlock__Main = ({ product, version }) => {
   const [category, setCategory] = useState("");
@@ -61,7 +61,7 @@ const ProductBlock__Main = ({ product, version }) => {
         className="btn-order flex w-full text-white items-center justify-center hover:bg-blue-500  transition duration-300 ease-in-out gap-1 bg-yellow-500 rounded-sm py-2 cursor-pointer"
         onClick={() => { navigateToDetail(product._id) }}
       >
-        <ShoppingCartIcon fontSize={version === 1 ? "small" : ""} />
+        <VisibilityIcon fontSize={version === 1 ? "small" : ""} />
         <Heading textSize={version === 1 ? "text-[12px]" : "text-sm"} title={"Xem chi tiết"} textColor={"text-white"} otherEmphasis={"uppercase "} />
       </div>
 
