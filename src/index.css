@@ -88,6 +88,26 @@
   background-color: #FFCB77 ;
 }
 
+.green-bg{
+  background-color: #2EC4B6;
+}
+
+.yellow-bg{
+  background-color: #F1E39B;
+}
+
+.momo-bg{
+  background-color: #D82D8B;
+}
+
+.lightGolden-bg{
+  background: rgb(210,140,5);
+  background: linear-gradient(90deg, rgba(210,140,5,1) 0%, rgba(221,220,4,1) 100%);
+}
+
+.pink-pastel-bg{
+  background-color: #A6C8FF;
+}
 
 .over-hidden{
   overflow: hidden;

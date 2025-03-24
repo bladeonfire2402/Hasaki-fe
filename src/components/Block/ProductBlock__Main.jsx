@@ -10,8 +10,13 @@ import { ClientContext } from "../../Context/clientContex";
 const ProductBlock__Main = ({ product, version }) => {
   const [category, setCategory] = useState("");
   const [isInCart, setIsInCart] = useState(false);
-  const { addToCart, user, cart } = useContext(ClientContext);
-  const navigateToDetail = useNavigate();
+  const { addToCart, user, cart,addViews } = useContext(ClientContext);
+  const navigate = useNavigate();
+
+  const navigateToDetail=async(productId)=>{
+    addViews(productId)
+    navigate(`/productDetail/${productId}`)
+  }
 
   // Cập nhật category khi sản phẩm có dữ liệu
   useEffect(() => {
@@ -33,7 +38,7 @@ const ProductBlock__Main = ({ product, version }) => {
   }, [cart, product._id]); // Thêm dependency product._id để đảm bảo tính đúng đắn
 
   return (
-    <div className={`ProductBlock__Main-wrapper flex flex-col gap-3 flex-none basis-1/5  rounded-lg pt-3  pb-5 relative ${version === 1 ? "border-2 px-3" : "px-5"} justify-between`}>
+    <div className={`ProductBlock__Main-wrapper flex flex-col gap-3 flex-none basis-1/5  rounded-lg pt-3  pb-5 relative ${version === 1 ? "border-2 px-3 basis-1/2" : "px-5"} justify-between`}>
       <div className="flex justify-center">
         <img src={product.imageUrl || ""} className={`"${version === 1 ? "w-[100px] h-[100px]" : " "} w-[200px]  h-[180px] mt-4`} />
       </div>
@@ -54,7 +59,7 @@ const ProductBlock__Main = ({ product, version }) => {
 
       <div
         className="btn-order flex w-full text-white items-center justify-center hover:bg-blue-500  transition duration-300 ease-in-out gap-1 bg-yellow-500 rounded-sm py-2 cursor-pointer"
-        onClick={() => { navigateToDetail(`/productDetail/${product._id}`); }}
+        onClick={() => { navigateToDetail(product._id) }}
       >
         <ShoppingCartIcon fontSize={version === 1 ? "small" : ""} />
         <Heading textSize={version === 1 ? "text-[12px]" : "text-sm"} title={"Xem chi tiết"} textColor={"text-white"} otherEmphasis={"uppercase "} />

@@ -16,6 +16,7 @@ const Cli_CheckOutScreen = () => {
   const [address,setAddress]=useState('')
   const [checkoutMomo,setcheckoutMomo]=useState(false)
   const [checkoutCod,setcheckoutCod]=useState(false)
+  const [checkoutWallet,setcheckoutWallet]=useState(false)
 
   const navigate=useNavigate()
 
@@ -36,7 +37,6 @@ const Cli_CheckOutScreen = () => {
       const itemsPrice = orderItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
       setcartPrices(itemsPrice)
       settotalPrice(itemsPrice+20000)
-      
     }
   },[Cart])
 
@@ -58,13 +58,19 @@ const Cli_CheckOutScreen = () => {
         {!checkoutCod?""
         :
         <div className='absolute w-full h-full top-[5px]'>
-            <ApprovePaymentPopsup userId={user._id} userAddrees={address} method={"COd"} close={checkoutCod} setClose={setcheckoutCod}/>
+            <ApprovePaymentPopsup userId={user._id} userAddrees={address} method={"COD"} close={checkoutCod} setClose={setcheckoutCod}/>
         </div>
         }
         {!checkoutMomo?""
         :
         <div className='absolute w-full h-full top-[5px]'>
             <ApprovePaymentPopsup userId={user._id} userAddrees={address} method={"MOMO"} close={checkoutMomo} setClose={setcheckoutMomo}/>
+        </div>
+        }
+        {!checkoutWallet?""
+        :
+        <div className='absolute w-full h-full top-[5px]'>
+            <ApprovePaymentPopsup userId={user._id} userAddrees={address} method={"WALLET"} close={checkoutWallet} setClose={setcheckoutWallet}/>
         </div>
         }
 
@@ -122,7 +128,7 @@ const Cli_CheckOutScreen = () => {
         </div>
         <div className='flex items-center gap-3'>
             <button 
-            className="w-full mt-4 py-2 bg-white text-black rounded-md hover:bg-blue-500 uppercase text-xl font-semibold hover:text-white"
+            className="w-full mt-4 py-2 momo-bg text-white rounded-md hover:bg-blue-500 uppercase text-xl font-semibold hover:text-white"
             onClick={()=>{setcheckoutMomo(!checkoutMomo)}}
             >
              Momo
@@ -132,6 +138,13 @@ const Cli_CheckOutScreen = () => {
             >
              Trực tiếp
             </button>
+            <button 
+            className="w-full mt-4 py-2 bg-yellow-300 text-black rounded-md hover:bg-blue-500 uppercase text-xl font-semibold hover:text-white"
+            onClick={()=>{setcheckoutWallet(!checkoutWallet)}}
+            >
+             Ví Lunaxi
+            </button>
+            
         </div>
         
       </div>

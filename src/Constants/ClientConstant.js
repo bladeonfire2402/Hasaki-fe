@@ -44,7 +44,7 @@ const FooterLine={
     SocialContact:[FacebookIcon,XIcon,InstagramIcon]
   },
 
-  CopyRight:"Copyright © 2024 Bản quyền bởi @Hosonhaoc  💖 bởi LUNAX"
+  CopyRight:"Copyright © 2024 Bản quyền bởi @PhamDinhLiem  💖 bởi LUNAX"
 }
 
 export {ClientMenu,FooterLine}

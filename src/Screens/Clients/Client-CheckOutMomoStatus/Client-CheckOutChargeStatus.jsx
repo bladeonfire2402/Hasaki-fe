@@ -2,10 +2,10 @@ import { useContext, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { ClientContext } from '../../../Context/clientContex';
 
-const Client_CheckOutMomoStatus = () => {
+const Client_CheckOutChargeStatus = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const {verifyPayment}=useContext(ClientContext)
+  const {verifyChargePayment,user}=useContext(ClientContext)
 
   // Extract parameters from the URL query string
 
@@ -16,13 +16,8 @@ const Client_CheckOutMomoStatus = () => {
   const message = queryParams.get('message');
 
   useEffect(()=>{
-    verifyPayment(message,orderId).then((res)=>(
-      console.log(res)
-    ))
-
+    verifyChargePayment(message,orderId,amount)
   },[])
-
-  
 
   return (
     
@@ -31,13 +26,13 @@ const Client_CheckOutMomoStatus = () => {
       <div className="w-full max-w-lg p-8 bg-white rounded-lg shadow-lg">
         {/* Header */}
         <h1 className="text-2xl font-semibold text-center text-green-600 mb-4">
-          Thanh toán thành công
+          Nạp điểm thành công
         </h1>
 
         {message !== 'Successful' ? (
           <div className="bg-green-100 border-l-4 border-green-500 p-4 mb-6">
             <p className="text-green-800 text-lg">
-              <strong>Chúc mừng! Thanh toán của bạn đã được thực hiện thành công.</strong>
+              <strong>Chúc mừng! Nạp điểm của bạn đã được thực hiện thành công.</strong>
             </p>
             <p className="text-green-700">Mã giao dịch: <strong>{requestId}</strong></p>
           </div>
@@ -62,7 +57,7 @@ const Client_CheckOutMomoStatus = () => {
               <span className="font-semibold text-gray-800">{orderId}</span>
             </div>
             <div className="flex justify-between">
-              <span className="font-medium text-gray-600">Số tiền:</span>
+              <span className="font-medium text-gray-600">Số điểm đã nạp:</span>
               <span className="font-semibold text-gray-800">{amount} VND</span>
             </div>
             <div className="flex justify-between">
@@ -86,4 +81,4 @@ const Client_CheckOutMomoStatus = () => {
   );
 };
 
-export default Client_CheckOutMomoStatus;
+export default Client_CheckOutChargeStatus;

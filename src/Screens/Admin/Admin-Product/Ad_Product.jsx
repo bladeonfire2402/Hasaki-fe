@@ -73,8 +73,6 @@ const Ad_Product = () => {
     }
   };
 
-  console.log(reload)
-  
 
   
 
@@ -179,7 +177,7 @@ const Ad_Product = () => {
                 </div>
             ))}
 
-            <Pagination totalPosts={productList.length} postsPerPage={postsPerPage} setCurrentPage={setCurrentPage} currentPage={currentPage}/>
+              <Pagination totalPosts={productList.length} postsPerPage={postsPerPage} setCurrentPage={setCurrentPage} currentPage={currentPage}/>
             </div>
         }
 

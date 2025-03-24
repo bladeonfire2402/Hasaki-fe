@@ -1,19 +1,11 @@
-import { use, useEffect, useState } from "react"
+import {  useEffect, useState } from "react"
 import Heading from "../Title/Heading/Heading"
 import './index.css'
 
 
-const ProductBlock__HotSale = ({product}) => {
-  const [showDescription,setshowDescription]= useState(false)
-
-  const [productSell,setproductSell]=useState(2)
-
-  const randomOrg=()=>{
-    const randomInt = Math.floor(Math.random() * 100) + 1;
-    return randomInt
-  }
-
-  
+// eslint-disable-next-line react/prop-types
+const ProductBlock__HotSale = ({product, view}) => {
+  const [showDescription,setshowDescription]= useState(false)  
 
   useEffect(() => {
     // eslint-disable-next-line react/prop-types
@@ -38,18 +30,18 @@ const ProductBlock__HotSale = ({product}) => {
 
 
   return (
-    <div id={`${product._id}`} className="ProductBlock flex flex-col items-center  gap-2 rounded-lg px-1 pb-3 relative">
+    <div id={`${product._id}`} className="ProductBlock flex flex-col items-center  gap-2 rounded-lg px-1 pb-3 relative green-bg">
       {showDescription==true ?
       <div className="DescriptionBlock  absolute z-99 right-2 top-3 ">
         <div className="left-content flex  gap-1 justify-center items-center rounded-lg animate-bounce text-sm primary-bg text-white text-lexend px-1 py-1">
-        <p className="">{randomOrg()}</p>
-      <p>Đã Bán</p>
+        <p className="">{view}</p>
+      <p>Đã Xem</p>
       </div>  
       </div>: <></>}
-      <div className="hide">
-        <img src={product.imageUrl} className="w-[120px] mt-4"/>
+      <div className="over-hidden w-[130px] mt-4 h-[130px] flex justify-center rounded-md items-center">
+        <img src={product.imageUrl} className="w-[130px] h-[130px] rounded-md"/>
       </div>
-      <Heading title={product.productName} textColor={"text-blue"} otherEmphasis={"w-[150px] text-center "}/>
+      <Heading title={product.productName} textColor={"text-white"} otherEmphasis={"w-[150px] text-center "}/>
     </div>
   )
 }

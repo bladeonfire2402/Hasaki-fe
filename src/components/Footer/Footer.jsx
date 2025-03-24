@@ -11,31 +11,31 @@ const FooterHasaki = () => {
     return (
       <CustomContainer align={true} justify={true} bgColor={"primary-bg"} padding={"py-[30px]  px-[100px] flex-col"} >
         <CustomContainer  otherStyle={"w-full justify-between"}  >
-          <div className="flex flex-col mt-7 gap-1">
+          <div className="flex flex-col mt-7 gap-1 text-white">
             {Object.entries(FooterLine.FirtstSection).map(([key,value])=>(
               <NorTitle key={key} title={value} otherStyle={"font-light"} />
             ))}
           </div>
 
 
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-3 text-white">
             <h1 className="text-lexend font-bold text-xl uppercase">Về Lunaxi</h1>
             <CustomContainer gap={"gap-7"} align={true}>
               <CustomContainer otherStyle={"flex-col"} gap={"gap-1"}>
                 {Object.entries(FooterLine.About.sect1).map(([key,value])=>(
-                  <NorTitle key={key} title={value} otherStyle={"font-light underline opacity-50"} />
+                  <NorTitle key={key} title={value} otherStyle={"font-light underline "} />
                 ))}
               </CustomContainer>
               <CustomContainer otherStyle={"flex-col"} gap={"gap-1"}>
                 {Object.entries(FooterLine.About.sect2).map(([key,value])=>(
-                  <NorTitle key={key} title={value} otherStyle={"font-light underline opacity-50"} />
+                  <NorTitle key={key} title={value} otherStyle={"font-light underline "} />
                 ))}
               </CustomContainer>
             </CustomContainer>  
           </div>
 
           <div className="w-[450px]">
-             <h1 className="text-lexend font-bold text-xl uppercase">{FooterLine.Contact.ContactTitle}</h1>
+             <h1 className="text-lexend text-white font-bold text-xl uppercase">{FooterLine.Contact.ContactTitle}</h1>
              <NorTitle title={FooterLine.Contact.ReceiveTitle} otherStyle={"font-light mb-5"}/>
 
              <div className="relative w-[350px]">
@@ -50,7 +50,7 @@ const FooterHasaki = () => {
 
         </CustomContainer>
         
-        <h1 className="text-md text-lexend mt-10">{FooterLine.CopyRight}</h1>
+        <h1 className="text-md text-lexend mt-10 text-white">{FooterLine.CopyRight}</h1>
 
       </CustomContainer>
     )

@@ -3,6 +3,7 @@ import { ClientContext } from '../../../Context/clientContex'
 import CartItemBlock from '../../../Components/Block/CartItemBlock'
 import { useNavigate } from "react-router";
 import Spinner from '../../../Components/spinner/spinner';
+import { toast } from 'react-toastify';
 
 const Cli_CartScreen = () => {
   const [Cart,setCart]=useState()
@@ -11,6 +12,15 @@ const Cli_CartScreen = () => {
   const {cart}=useContext(ClientContext)
 
   const navigate=useNavigate()
+
+  const handleCheckOut = ()=>{
+    if(Cart.length==0){
+      toast.error("Chưa có sản phẩm trong giỏ")
+    }
+    else{
+      navigate('/checkout')
+    }
+  }
 
   useEffect(()=>{
     setTimeout(()=>{
@@ -67,7 +77,7 @@ const Cli_CartScreen = () => {
           </div>
           <button 
           className="w-full mt-4 py-2 bg-white text-black rounded-md hover:bg-blue-500 uppercase text-xl font-semibold hover:text-white"
-          onClick={()=>{navigate('/checkout')}}
+          onClick={()=>{handleCheckOut()}}
           >
             Thanh toán
           </button>

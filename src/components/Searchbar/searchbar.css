@@ -1,14 +1,5 @@
-.SearchBar__Content input:focus{
-    /* Viền màu xanh khi focus */
-  outline: none;              /* Bỏ đường viền mặc định của trình duyệt */
-  box-shadow: 0 0 5px rgb(128, 1, 255); /* Đổ bóng nhẹ */
-  border:  1px solid rgb(128, 1, 255);
-  transition: 0.5 ease-in-out;
-}
 
-.SearchBar__Content input{
-    border:  1px solid black;
-}
+
 
 .SearchBar__Content .search-icon{
     top: 50%;

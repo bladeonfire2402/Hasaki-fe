@@ -3,18 +3,24 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
 
+
 export const ClientContext = createContext(null);
 
 // eslint-disable-next-line react/prop-types
 const ClientContextProvider = ({children}) => {
     const [cart, setCart] = useState([]);
     const [clitoken, setcliToken] = useState("");
+    const [wishlist,setWishList]=useState([])
     const [productList, setproductList] = useState();
     const [proError, setproError] = useState();
     const [categoryList, setcategoryList] = useState();
     const [user, setUser] = useState("");
     const [reload, setReload] = useState(false);
+    const [userOrder,setuserOrder]=useState([])
     const [reloadCart,setReloadCart]=useState(false)
+    const [wallet,setWallet]=useState(false)
+    
+
     const navigate= useNavigate()
 
     const getProductList = async () => {
@@ -36,7 +42,6 @@ const ClientContextProvider = ({children}) => {
             console.log(e);
         }
     };
-
     
     const getTokenAndUser = async () => {
         const getUserInfo = import.meta.env.VITE_API_ENDPOINT_GETUSERINFO;
@@ -195,6 +200,35 @@ const ClientContextProvider = ({children}) => {
         }
     }
 
+    const checkoutWallet = async(userId,userAddress)=>{
+        const uri=import.meta.env.VITE_API_ENDPOINT_CHECKOUTWALLLET
+        try {
+            if (!user) {
+                toast.error("Vui lòng đăng nhập hoặc đăng kí")
+                return;
+            }
+
+            const response = await axios.post(uri,{
+                userId:userId,
+                address:userAddress
+            })
+
+            if (response.status === 200) {
+                toast.success(response.data.message)
+                
+                 // Cập nhật giỏ hàng
+            }
+
+            setReloadCart(!reloadCart)
+            setReload(!reload)
+
+            navigate('/')
+        } catch (error) {
+            console.log(error.response.data.message)
+            toast.error(error.response.data.message)
+        }
+    }
+
     const checkoutCod = async(userId,userAddress)=>{
         const uri=import.meta.env.VITE_API_ENDPOINT_CHECKOUTCOD
         try {
@@ -208,20 +242,220 @@ const ClientContextProvider = ({children}) => {
                 address:userAddress
             })
 
+            setReloadCart(!reloadCart)
+
             if (response.status === 200) {
                 toast.success(response.data.message)
                 navigate('/')//sửa thành trang đơn hàng của người dùng
             }
-            
-            setReloadCart(!reloadCart)
-
-            
         } catch (error) {
             toast.error(error.message)
         }
 
     }
+
+    const addViews = async(productId)=>{
+        const uri=import.meta.env.VITE_API_ENDPOINT_ADDVIEWS
+        try {
+            const response = await axios.post(uri,{
+                productId:productId,
+            })
+
+            if (response.status === 200) {
+                console.log(response.data.message)
+            }
+            
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
     
+    const getTopViews =async()=>{
+        const uri=import.meta.env.VITE_API_ENDPOINT_TOPVIEWS
+        try {
+            const response = await axios.get(uri,{})
+
+            if (response.status === 200) {
+                console.log(response.data.message)
+                return response.data
+            }
+            
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
+
+    const getUserOrders = async (userId) => {
+        const uri = import.meta.env.VITE_API_ENDPOINT_GETUSERORDERS;
+        try {
+            const response = await axios.get(uri, {
+                params: {
+                    userId: userId,  // Token được gửi qua query parameter 'token'
+                }
+            });
+
+            if(response.status==200){
+                setuserOrder(response.data.userOrders); // Cập nhật trạng thái sản phẩm
+            }
+        } catch (e) {
+            setproError(e);
+        }
+    };
+
+    const getWishList = async(userId)=>{
+        const uri = import.meta.env.VITE_API_ENDPOINT_GETUSERWISHLIST
+
+        try {
+            const response= await axios.get(uri,{
+                params:{
+                    userId:userId
+                }
+            })
+
+            if(response.status==200){
+                setWishList(response.data.wishList.wishes)
+            }
+            
+        } catch (error) {
+            toast.error("Lỗi rồi "+error)
+        }
+    }
+
+    const addToWishList = async(userId,productId)=>{
+        const uri = import.meta.env.VITE_API_ENDPOINT_ADDUSERWISHLIST
+
+        try {
+            const response = await axios.post(uri,{
+                userId:userId,
+                productId:productId
+            })
+
+            if(response.status==200){
+                toast.success("Đã thêm vào danh sách yêu thích")
+                setReload(!reload)
+            }
+        } catch (error) {
+            console.log(error)
+            toast.error("Lỗi rồi" + error)
+        }
+    }
+
+    const removeFromWishList = async(userId,productId)=>{
+        const uri = import.meta.env.VITE_API_ENDPOINT_REMOVEUSERWISHLIST
+
+        try {
+            const response = await axios.post(uri,{
+                userId:userId,
+                productId:productId
+            })
+
+            if(response.status==200){
+                toast.success("Dã bỏ khỏi danh sách yêu thích")
+                setReload(!reload)
+            }
+        } catch (error) {
+            toast.error("Lỗi rồi" + error)
+        }
+
+    }
+
+    const verifyPayment=async(paymentstate,orderid)=>{
+        const uri =import.meta.env.VITE_API_ENDPOINT_VERIFYPAYMENT
+        try {
+            const response = await axios.post(uri,{
+                paymentstate:paymentstate,
+                orderid:orderid
+            })
+            
+            if(response.status==200){
+                toast.success("Thanh toán thành công")
+                
+            }
+        } catch (error) {
+            toast.error("Lỗi rồi bruh: "+error)
+        }
+    }
+
+    const verifyChargePayment = async(message,paymentId,amount)=>{
+        try {
+            const uri =import.meta.env.VITE_API_ENDPOINT_VERIFYCHARGE
+        
+            const response = axios.post(uri,{
+                message:message,
+                paymentId:paymentId,
+                amount
+            })
+
+            if(response.status==200){
+                toast.success("Nạp tiền thành công")
+            }
+            
+        } catch (error) {
+            console.log(error)
+            toast.error(error)
+        }
+    }
+
+    const addFunsToWallet = async(userId,point)=>{
+        const uri= import.meta.env.VITE_API_ENDPOINT_CHARGEWALLET
+        try {
+            const response= await axios.post(uri,{
+                userId,
+                chargePoint:point
+            })
+
+            if(response.status==200){
+             window.location.href = response.data.payUrl;   
+            }
+        } catch (error) {
+            toast.error(error)
+        }
+    }
+
+    const getWallet=async(userId)=>{
+       const uri=import.meta.env.VITE_API_ENDPOINT_GETUSERWALLET
+       try {
+         const response = await axios.get(uri,{
+            params:{
+                userId
+            }
+         })
+
+         if(response.status==200){
+            setWallet(response.data.wallet)
+         }
+
+
+       } catch (error) {
+         console.log(error)
+         toast.error(error)
+       }
+    }
+
+    const cancelOrder=async(orderid)=>{
+        const uri =import.meta.env.VITE_API_ENDPOINT_CANCELORER
+        console.log(orderid)
+        try {
+            const response = await axios.post(uri,{
+                orderId:orderid
+            })
+            
+            if(response.status==200){
+                toast.success("Hủy đơn hàng thành công")
+                setReload(!reload)
+            }
+        } catch (error) {
+            toast.error("Lỗi rồi bruh: "+error)
+        }
+    }
+
+    useEffect(()=>{
+        if(user){
+            getWallet(user._id)
+        }
+    },[user])
+
+
     // Gọi getCartUser khi user thay đổi
     useEffect(() => {
         if (user) {
@@ -235,6 +469,12 @@ const ClientContextProvider = ({children}) => {
         getCategoriesList();
     }, [reload]);
 
+    useEffect(()=>{
+        if(user){
+            getUserOrders(user._id)
+            getWishList(user._id)
+        }
+    },[user,reload])
     const contextValue = {
         clitoken,setcliToken,
         productList,categoryList,
@@ -242,7 +482,11 @@ const ClientContextProvider = ({children}) => {
         user,
         reload,setReload,
         cart, addToCart,removeOneFromCart,getCartItemUser,
-        checkoutMomo,checkoutCod
+        checkoutMomo,checkoutCod,verifyPayment,
+        addViews,getTopViews, 
+        userOrder,cancelOrder,
+        wishlist,addToWishList,removeFromWishList,
+        verifyChargePayment,addFunsToWallet,wallet,checkoutWallet
     };
 
     return (
