@@ -14,6 +14,7 @@ const Client_ProductDetailScreen = () => {
 
   const [product, setProduct] = useState(null);
   const [isInWishList, setIsInWishList] = useState(false);
+  const [error, setError] = useState(null); // State để lưu thông báo lỗi
 
   // Tìm sản phẩm theo id param
   useEffect(() => {
@@ -35,12 +36,19 @@ const Client_ProductDetailScreen = () => {
   const handleToggleWishlist = async () => {
     if (!user || !product) return;
 
-    if (isInWishList) {
-      await removeFromWishList(user._id, product._id);
-      setIsInWishList(false); // cập nhật trạng thái ngay
-    } else {
-      await addToWishList(user._id, product._id);
-      setIsInWishList(true); // cập nhật trạng thái ngay
+    try {
+      if (isInWishList) {
+        // Nếu sản phẩm đã có trong wishlist, xóa nó
+        await removeFromWishList(user._id, product._id);
+        setIsInWishList(false); // cập nhật trạng thái ngay
+      } else {
+        // Nếu sản phẩm chưa có trong wishlist, thêm nó vào
+        await addToWishList(user._id, product._id);
+        setIsInWishList(true); // cập nhật trạng thái ngay
+      }
+    } catch (error) {
+      console.error("Lỗi khi xử lý wishlist:", error);
+      setError("Có lỗi xảy ra khi xử lý yêu cầu. Vui lòng thử lại sau.");
     }
   };
 
@@ -116,6 +124,12 @@ const Client_ProductDetailScreen = () => {
                   ? "Bỏ khỏi danh sách yêu thích"
                   : "Thêm vào danh sách yêu thích"}
               </button>
+            </div>
+          )}
+
+          {error && (
+            <div className="mt-4 text-red-500 text-center">
+              {error}
             </div>
           )}
         </div>

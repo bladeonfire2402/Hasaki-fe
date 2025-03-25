@@ -7,10 +7,11 @@ import newUser from '/assets/img/newUser.png'
 import kingofBuy from '/assets/img/kingofBuy.png'
 import lunaxiPlay from '/assets/img/lunaxiPlay.png'
 import charge from '/assets/img/charge.jpg'
-
-
-
-
+import banner3 from '/assets/img/1.jpg'
+import orc from '/assets/img/orc.jpg'
+import a from '/assets/img/a.jpg'
+import haha from '/assets/img/haha.jpg'
+import hihi from '/assets/img/hihi.jpg'
 
 const imgData={
     logo,
@@ -21,7 +22,12 @@ const imgData={
     newUser,
     kingofBuy,
     lunaxiPlay,
-    charge
+    charge,
+    banner3,
+    a,
+    orc,
+    hihi,
+    haha
 }
 
 export default imgData

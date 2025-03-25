@@ -1,15 +1,21 @@
 .AuthScreen-wrapper{
-  background: rgb(34,2,151);
-  background: linear-gradient(180deg, rgba(34,2,151,1) 0%, rgba(0,0,0,1) 100%);
+  height: 100vh;
+  background: rgb(254, 111, 97); /* Màu nền ngoài */
+  background: linear-gradient(180deg, rgba(254, 111, 97, 1) 0%, rgba(0, 0, 0, 1) 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  width: 100%;
 }
 
 .AuthScreen-wrapper .AuthScreen__BoxContent{
-  background: rgb(34,2,151);
-  background: linear-gradient(90deg, rgba(34,2,151,1) 0%, rgba(255,255,255,1) 100%);
+  background: rgb(254, 111, 97);
+  background: linear-gradient(90deg, rgb(254, 111, 97) 0%, rgba(255,255,255,1) 100%);
 }
 
 .AuthScreen__BoxContent-SignIn input:focus, .AuthScreen__BoxContent-Register input:focus, .AuthScreen__BoxContent-ResetPassword  input:focus{
-  border: 2px solid rgb(128, 1, 255);  /* Viền màu xanh khi focus */
+  border: 2px solid #fe6f61; /* Viền màu xanh khi focus */
   outline: none;              /* Bỏ đường viền mặc định của trình duyệt */
   box-shadow: 0 0 5px rgb(128, 1, 255); /* Đổ bóng nhẹ */
   transform: scale(1.05);     /* Phóng to nhẹ input */
@@ -21,6 +27,21 @@
 }
 
 
+
+
 .AuthScreen-wrapper .AuthScreen__BoxContent-ResetPassword{
   background: rgba(255, 255, 255, 0.1);
 }
+
+/* Nền ngoài của màn hình */
+.AuthScreen_Login-wrapper {
+  height: 100vh;
+  background: rgb(254, 111, 97); /* Màu nền ngoài */
+  background: linear-gradient(180deg, rgba(254, 111, 97, 1) 0%, rgba(0, 0, 0, 1) 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+

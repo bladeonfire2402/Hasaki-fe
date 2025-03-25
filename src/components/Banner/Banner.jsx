@@ -5,7 +5,7 @@ import 'swiper/css/pagination';
 import imgData from '../../../public/assets/data/imgData';
 
 const Banner = () => {
-  const bannerList = [imgData.banner1, imgData.banner2];
+  const bannerList = [imgData.banner3,imgData.hihi,imgData.haha,imgData.orc];
 
   return (
     <div className="w-full overflow-hidden mb-5">
