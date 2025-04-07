@@ -4,7 +4,7 @@ import { ClientContext } from "../../Context/clientContex"
 
 
 // eslint-disable-next-line react/prop-types
-const ApprovePaymentPopsup = ({userId,userAddrees,method,close,setClose}) => {
+const ApprovePaymentPopsup = ({userId,userAddrees,method,close,setClose,discount}) => {
       const {checkoutMomo,checkoutCod,checkoutWallet}=useContext(ClientContext)
     
      const handleCheckOut=async(method,address)=>{
@@ -16,10 +16,10 @@ const ApprovePaymentPopsup = ({userId,userAddrees,method,close,setClose}) => {
         }
     
         if(method=="MOMO"){
-            await checkoutMomo(userId,address)
+            await checkoutMomo(userId,address,discount)
         }
         else if(method=="COD"){
-            await checkoutCod(userId,address)
+            await checkoutCod(userId,address,discount)
         }
         else if(method=="WALLET"){
           await checkoutWallet(userId,address)

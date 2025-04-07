@@ -4,6 +4,7 @@ import ClientInfo from "../../../Components/ProfileSection/ClientInfo/ClientInfo
 import ClientOrder from "../../../Components/ProfileSection/ClientOrder/ClientOrder"
 import ClientWishList from "../../../Components/ProfileSection/ClientWishList/ClientWishList"
 import ClientWallet from "../../../Components/ProfileSection/ClientWallet/ClientWallet"
+import ClientRefund from "../../../Components/ProfileSection/ClientRefund/ClientRefund"
 
 
 const Client_ProfileScreen = () => {
@@ -30,6 +31,11 @@ const Client_ProfileScreen = () => {
           return(
             <ClientWallet/>
           )
+        }
+        else if(section==='Refund'){
+            return(
+                <ClientRefund/>
+            )
         }
     }
 

@@ -8,11 +8,12 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import PersonIcon from '@mui/icons-material/Person';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import WalletIcon from '@mui/icons-material/Wallet';
+import ReplayIcon from '@mui/icons-material/Replay';
 
 // eslint-disable-next-line react/prop-types
 const SideBarProfile=({setSection})=>{
     const navigate=useNavigate();
-    const {user } = useContext(ClientContext);
+    const {user,reload,setReload } = useContext(ClientContext);
 
     const logout=()=>{
         localStorage.removeItem("token");
@@ -20,6 +21,7 @@ const SideBarProfile=({setSection})=>{
         //setToken("");
         //setAdmin(false);
         toast.success("Logout Successfully")
+        setReload(!reload)
         navigate("/");
       }
     
@@ -61,11 +63,22 @@ const SideBarProfile=({setSection})=>{
                 </div>
             </div>
 
+            <div className="shadow-vip rounded-md mt-3 Sidebar-item-switch"  onClick={()=>{setSection("Refund")}}>
+                <div className="flex justify-between items-center py-3 px-2">
+                    <div className="flex gap-2"><h3>Đổi trả</h3></div>
+                    <ReplayIcon fontSize="medium"/>
+                </div>
+            </div>
+
+           
+
             <div className="shadow-vip rounded-md mt-3 Sidebar-item-switch" onClick={()=>{logout()}}>
                 <div className="flex justify-between items-center py-3 px-2">
                     <div className="flex gap-2"><h3>Đăng xuất</h3></div>
                 </div>
             </div>
+
+          
             
             
         </div>

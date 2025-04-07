@@ -4,6 +4,7 @@ import Ad_Product from "../Admin-Product/Ad_Product"
 import Ad_Client from "../Admin-Client/Ad_Client"
 import Ad_Order from "../Admin-Order/Ad_Order"
 import Ad_Categories from "../Admin-Categories/Ad_Categories"
+import Ad_Refund from "../Admin-Refund/Ad_Refund"
 
 
 
@@ -18,6 +19,8 @@ const Admin_DashBoard = () => {
                 <Route path="/user" element={<Ad_Client/>}/>
                 <Route path="/order" element={<Ad_Order/>}/>
                 <Route path="/category" element={<Ad_Categories/>}/>
+                <Route path="/refund" element={<Ad_Refund/>}/>
+
                
             </Routes>
         </div>

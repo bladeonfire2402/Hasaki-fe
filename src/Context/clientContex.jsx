@@ -19,7 +19,7 @@ const ClientContextProvider = ({children}) => {
     const [userOrder,setuserOrder]=useState([])
     const [reloadCart,setReloadCart]=useState(false)
     const [wallet,setWallet]=useState(false)
-    
+    const [reqRefund,setreqRefund]=useState([])
 
     const navigate= useNavigate()
 
@@ -28,6 +28,18 @@ const ClientContextProvider = ({children}) => {
         try {
             const response = await axios.get(getProductUrl);
             setproductList(response.data.products); // Cập nhật trạng thái sản phẩm
+        } catch (e) {
+            setproError(e);
+        }
+    };
+
+    const getUserRefund = async (userId) => {
+        const uri = import.meta.env.VITE_API_ENDPOINT_GETUSERREFUNDS;
+        try {
+            const response = await axios.get(uri,{params:{
+                userId
+            }});
+            setreqRefund(response.data.userRefund); // Cập nhật trạng thái sản phẩm
         } catch (e) {
             setproError(e);
         }
@@ -172,7 +184,7 @@ const ClientContextProvider = ({children}) => {
         }
     }
 
-    const checkoutMomo = async(userId,userAddress)=>{
+    const checkoutMomo = async(userId,userAddress,dicountPrice)=>{
         const uri=import.meta.env.VITE_API_ENDPOINT_CHECKOUTMOMO
         try {
             if (!user) {
@@ -182,7 +194,8 @@ const ClientContextProvider = ({children}) => {
 
             const response = await axios.post(uri,{
                 _id:userId,
-                address:userAddress
+                address:userAddress,
+                dicountPrice:dicountPrice
             })
 
             if (response.status === 200) {
@@ -229,7 +242,7 @@ const ClientContextProvider = ({children}) => {
         }
     }
 
-    const checkoutCod = async(userId,userAddress)=>{
+    const checkoutCod = async(userId,userAddress,discountPrice)=>{
         const uri=import.meta.env.VITE_API_ENDPOINT_CHECKOUTCOD
         try {
             if (!user) {
@@ -239,7 +252,8 @@ const ClientContextProvider = ({children}) => {
 
             const response = await axios.post(uri,{
                 _id:userId,
-                address:userAddress
+                address:userAddress,
+                dicountPrice:discountPrice,
             })
 
             setReloadCart(!reloadCart)
@@ -248,6 +262,8 @@ const ClientContextProvider = ({children}) => {
                 toast.success(response.data.message)
                 navigate('/')//sửa thành trang đơn hàng của người dùng
             }
+
+            setReload(!reload)
         } catch (error) {
             toast.error(error.message)
         }
@@ -449,6 +465,32 @@ const ClientContextProvider = ({children}) => {
         }
     }
 
+    const askForRefund = async(orderId,userId,reason)=>{
+        const uri=import.meta.env.VITE_API_ENDPOINT_REFUND
+        try {
+            if (!user) {
+                toast.error("Vui lòng đăng nhập hoặc đăng kí")
+                return;
+            }
+
+            const response = await axios.post(uri,{
+                userId:userId,
+                orderId:orderId,
+                reason:reason
+            })
+
+            if (response.status === 200) {
+                toast.success(response.data.message)  
+            }
+
+            setReloadCart(!reloadCart)
+            setReload(!reload)
+        } catch (error) {
+            console.log(error)
+            toast.error("Đơn hàng này đã được yêu cầu hoàn tiền")
+        }
+    }
+
     useEffect(()=>{
         if(user){
             getWallet(user._id)
@@ -460,6 +502,7 @@ const ClientContextProvider = ({children}) => {
     useEffect(() => {
         if (user) {
             getCartUser();
+            getUserRefund(user._id)
         }
     }, [user,reloadCart]);
 
@@ -475,6 +518,7 @@ const ClientContextProvider = ({children}) => {
             getWishList(user._id)
         }
     },[user,reload])
+
     const contextValue = {
         clitoken,setcliToken,
         productList,categoryList,
@@ -486,7 +530,8 @@ const ClientContextProvider = ({children}) => {
         addViews,getTopViews, 
         userOrder,cancelOrder,
         wishlist,addToWishList,removeFromWishList,
-        verifyChargePayment,addFunsToWallet,wallet,checkoutWallet
+        verifyChargePayment,addFunsToWallet,wallet,checkoutWallet,
+        askForRefund,reqRefund
     };
 
     return (

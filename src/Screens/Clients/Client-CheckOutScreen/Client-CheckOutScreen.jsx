@@ -11,12 +11,14 @@ const Cli_CheckOutScreen = () => {
   const [Cart,setCart]=useState()
   const [cartPrices,setcartPrices]=useState(0)
   const [totalPrice,settotalPrice]=useState(0)
-  const {cart,user}=useContext(ClientContext)
+  const {cart,user,wallet}=useContext(ClientContext)
   const [loading,setLoading]=useState(false)
   const [address,setAddress]=useState('')
   const [checkoutMomo,setcheckoutMomo]=useState(false)
   const [checkoutCod,setcheckoutCod]=useState(false)
   const [checkoutWallet,setcheckoutWallet]=useState(false)
+  const [discount,setDiscount]=useState(0);
+
 
   const navigate=useNavigate()
 
@@ -25,8 +27,19 @@ const Cli_CheckOutScreen = () => {
       setLoading(!loading)
     },1000)
   },[])
+
+  const handleDiscountAll=(cartPrices,points)=>{
+    if(cartPrices>points){
+      setDiscount(points)
+    }
+    else{
+      setDiscount(cartPrices+20000)
+    }
+  }
+  
   
   useEffect(()=>{
+    console.log(wallet)
     if(Cart){
         const orderItems = Cart.map(item => ({
           product: item.product._id,
@@ -58,19 +71,19 @@ const Cli_CheckOutScreen = () => {
         {!checkoutCod?""
         :
         <div className='absolute w-full h-full top-[5px]'>
-            <ApprovePaymentPopsup userId={user._id} userAddrees={address} method={"COD"} close={checkoutCod} setClose={setcheckoutCod}/>
+            <ApprovePaymentPopsup discount={discount} userId={user._id} userAddrees={address} method={"COD"} close={checkoutCod} setClose={setcheckoutCod}/>
         </div>
         }
         {!checkoutMomo?""
         :
         <div className='absolute w-full h-full top-[5px]'>
-            <ApprovePaymentPopsup userId={user._id} userAddrees={address} method={"MOMO"} close={checkoutMomo} setClose={setcheckoutMomo}/>
+            <ApprovePaymentPopsup discount={discount} userId={user._id} userAddrees={address} method={"MOMO"} close={checkoutMomo} setClose={setcheckoutMomo}/>
         </div>
         }
         {!checkoutWallet?""
         :
         <div className='absolute w-full h-full top-[5px]'>
-            <ApprovePaymentPopsup userId={user._id} userAddrees={address} method={"WALLET"} close={checkoutWallet} setClose={setcheckoutWallet}/>
+            <ApprovePaymentPopsup discount={discount} userId={user._id} userAddrees={address} method={"WALLET"} close={checkoutWallet} setClose={setcheckoutWallet}/>
         </div>
         }
 
@@ -79,22 +92,42 @@ const Cli_CheckOutScreen = () => {
       ) : (
         <div className='flex justify-between gap-4'>
             <div className='userinfo w-2/5'>
-                {!user?"dd"
+                {!user?"loading.."
                 :
-                <div className='flex px-3 py-3 text-white flex-col rounded rounded-md primary-bg'>
-                    <div className='flex gap-2 items-center'>
-                        <AccountCircleIcon/>
-                        <h1 className='text-xl font-semibold text-center '>Thông tin khách hàng</h1>
-                    </div>
-                    <h1 className='mt-2'><b>Họ tên:</b> {user.fullname}</h1>
-                    <h1 className='mt-1'><b>Email:</b> {user.email}</h1>
-                    <h1 className='mt-1'><b>Số điện thoại:</b> {user.phone}</h1>
-                    <h1 className='mt-1'><b>Địa chỉ giao hàng</b></h1>
-                    <input className='rounded mt-1 text-black px-2 py-2 h-[60px]' 
-                    required
-                    value={address}
-                    onChange={(e)=>{setAddress(e.target.value)}}
-                    />
+                <div className='flex  flex-col gap-2'>
+                  <div className='flex px-3 py-3 text-white flex-col rounded rounded-md primary-bg '>
+                      <div className='flex gap-2 items-center'>
+                          <AccountCircleIcon/>
+                          <h1 className='text-xl font-semibold text-center '>Thông tin khách hàng</h1>
+                      </div>
+                      <h1 className='mt-2'><b>Họ tên:</b> {user.fullname}</h1>
+                      <h1 className='mt-1'><b>Email:</b> {user.email}</h1>
+                      <h1 className='mt-1'><b>Số điện thoại:</b> {user.phone}</h1>
+                      <h1 className='mt-1'><b>Địa chỉ giao hàng</b></h1>
+                      <input className='rounded mt-1 text-black px-2 py-2 h-[60px]' 
+                      required
+                      value={address}
+                      onChange={(e)=>{setAddress(e.target.value)}}
+                      />
+                  </div>
+                  <div className='lex px-3 py-3 text-white flex-col rounded rounded-md primary-bg '>
+                    <h1 className='text-white font-semibold'>Số dư trong ví hiện tại : {wallet.points}</h1>
+                    <h2>Sử dụng điểm Lunaxi để được giảm giá ?</h2>
+                    
+                    <div className='px-2 py-1 bg-white font-semibold rounded-sm mt-2 text-red-400 cursor-pointer'
+                    onClick={()=>{setDiscount(100000)}}
+                    >100000 LUNA - Giảm 100000</div>
+                    <div className='px-2 py-1 bg-white  font-semibold rounded-sm mt-2 text-red-400 cursor-pointer'
+                    onClick={()=>{setDiscount(200000)}}>200000 LUNA - Giảm 200000</div>
+                    <div className='px-2 py-1 bg-white  font-semibold rounded-sm mt-2 text-red-400 cursor-pointer'
+                    onClick={()=>{setDiscount(400000)}}
+                    >400000 LUNA - Giảm 400000</div>
+                    <div className='px-2 py-1 bg-white  font-semibold rounded-sm mt-2 text-red-400 cursor-pointer'
+                    onClick={()=>{handleDiscountAll(cartPrices,wallet.points)}}
+                    >Sử dụng hết</div>
+
+                    <div className='text-white mt-2 font-semibold text-xl'>Số tiền được giảm giá: {discount}</div>
+                  </div>
                 </div>
                 }
             </div>
@@ -124,7 +157,7 @@ const Cli_CheckOutScreen = () => {
         </div>
         <div className="flex justify-between text-xl font-semibold text-white">
           <span>Tổng cộng:</span>
-          <span> {totalPrice} VNĐ</span>
+          <span> {totalPrice - discount} VNĐ</span>
         </div>
         <div className='flex items-center gap-3'>
             <button 

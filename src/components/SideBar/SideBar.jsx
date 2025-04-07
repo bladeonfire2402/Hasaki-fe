@@ -6,10 +6,10 @@ import CategoryIcon from '@mui/icons-material/Category';
 import imgData from "../../../public/assets/data/imgData";
 import LocalMallIcon from '@mui/icons-material/LocalMall';
 import { useNavigate } from "react-router";
-
+import AssignmentReturnIcon from '@mui/icons-material/AssignmentReturn';
 
 const SideBar=()=>{
-    const menu =["Product","User","Categories","Order","News"]
+    const menu =["Product","User","Categories","Order","News","Refund"]
 
     const [onSelectedMenu,setOnSelectedMenu] = useState("Product")
 
@@ -26,7 +26,10 @@ const SideBar=()=>{
             return(<div><NewspaperIcon/></div>)
         }else if(menu==="Order"){
             return (<div><LocalMallIcon/></div>)
+        }else if(menu=="Refund"){
+            return(<div><AssignmentReturnIcon/></div>)
         }
+        
     }
 
     const handleNavigate=(menu)=>{
@@ -43,6 +46,8 @@ const SideBar=()=>{
             navigate('/admin/dashboard/user')
         }else if(menu==="Order"){
             navigate('/admin/dashboard/order')
+        }else if(menu=="Refund"){
+            navigate('/admin/dashboard/refund')
         }
        
     }

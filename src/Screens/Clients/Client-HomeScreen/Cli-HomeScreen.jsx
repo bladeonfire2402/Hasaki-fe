@@ -20,6 +20,7 @@ const Client_HomeScreen = ()=>{
                 <HotSaleSection/>
                 <CategorySection/>                
               </div>
+              <script src="//code.tidio.co/do7e9qdifuvrf8zkhslz8rxmodvosylv.js" async></script>
             </CustomContainer>
             <CustomContainer justify={true} otherStyle={""}>
               <SuggestionSection productList={productList}/>

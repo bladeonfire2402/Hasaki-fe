@@ -51,8 +51,6 @@ const ClientWallet = () => {
 
   }
 
-
-  
   
   return (
     <div>

@@ -1,24 +1,33 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { adminContext } from "../../../Context/adminContext"
 import Spinner from "../../../Components/spinner/spinner"
-import { cutDate } from "../../../utils/date-utils"
-import DeleteIcon from '@mui/icons-material/Delete';
-import UpgradeIcon from '@mui/icons-material/Upgrade';
-import CreateProductForm from "../../../Components/form/CreateProductForm/createProductForm";
+import UpdateIcon from '@mui/icons-material/Update';
+
 import SearchIcon from '@mui/icons-material/Search';
 import ImportExportIcon from '@mui/icons-material/ImportExport';
 import AddToPhotosIcon from '@mui/icons-material/AddToPhotos';
 import InfoIcon from '@mui/icons-material/Info';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
+import UpdateOrderForm from "../../../Components/form/UpdateOrderForm/updateOrderForm";
 
 const Ad_Order = () => {
-  const {productList} = useContext(adminContext) // List sản phẩm
-  const [create,setCreate]=useState(false)
+  const {orderList} = useContext(adminContext) // List sản phẩm
+  const [update,setUpdate]=useState(false)
+  const [curOrder,setCurOder]=useState()
+
   const optionValue=["Xem 5 đơn hàng","Xem 7 đơn hàng"]
   const orderStatus=["Đã xác nhận","Đang giao","Đã giao","Đã hủy"]
   const sortList = ["Mặc định","Theo tổng tiền từ cao đến thấp","Theo tổng tiền từ cao đến thấp"]
   
-  
+  const handleUpdateOrder  = (order) =>{
+    setCurOder(order);
+    setUpdate(!update);
+
+  }
+
+  useEffect(()=>{
+    console.log(orderList)
+  },[orderList])
   
   return (
     <div className="Ad_Product-wrapper  relative">
@@ -82,15 +91,17 @@ const Ad_Order = () => {
 
             
         </div>
-        {create==false?<></>:<div className="w-full h-full  absolute top-0  bg-gray-200 "><CreateProductForm/></div>}
-        {!productList?
+        {update==false?<></>:<div className="w-full h-full  absolute top-0  bg-gray-200 ">
+          <UpdateOrderForm order={curOrder}  setUpdate={setUpdate} update={update}/></div>}
+        {!orderList?
             <div className="loading"><Spinner/></div>
             :       
             <div className="Ad_Product-Result rounded-md overflow-hidden my-3 mx-3">
-            <div className="grid grid-cols-9 items-cente bg-black text-white text-lexend  px-9 py-2">
-                <h2>STT</h2>
+            <div className="grid grid-cols-10 items-cente bg-black text-white text-lexend  px-5 py-2">
+                <h2 className="w-[100px]">STT</h2>
                 <h2>Mã đơn hàng</h2>
                 <h2>Tên KH</h2>
+                <h2>Đia chỉ KH</h2>
                 <h2>Ghi chú</h2>
                 <h2>Tổng số SP</h2>
                 <h2>Trạng thái</h2>
@@ -99,19 +110,34 @@ const Ad_Order = () => {
                 <h2>Thao tác</h2>
             </div>
 
-            {productList.map((product,index)=>(
-                <div key={product._id} className="grid grid-cols-9  text-black text-lexend border-2 px-9 py-5">
+            {orderList.map((order,index)=>(
+                <div key={order._id} className="grid grid-cols-10 text-black text-lexend border-2 px-5 py-5">
                   <h2>{index+1}</h2>
-                 <h2>{product.productName}</h2>
-                 <img className="w-[70px] h-[70px]" src={product.imageUrl}/>
-                 <h2>{product.description}</h2>
-                 <h2>{product.categoryId.name}</h2>
-                 <div>{product.status || <div className="">Active</div>}</div>
-                 <h2>{product.price}</h2>
-                 <h2>{cutDate(product.createdAt)}</h2>
-                 <div className="flex gap-2 ">
-                  <div className="flex justify-center items-center py-2  h-fit rounded-md px-2 bg-red-500  " onClick={()=>{}}><DeleteIcon style={{ color: 'white', fontSize: 20 }} /></div>
-                  <div className="flex justify-center items-center py-2  h-fit rounded-md px-2 bg-blue-500  "><UpgradeIcon style={{ color: 'white', fontSize: 20 }} /></div>   
+                 <h2 className="break-words">{order._id}</h2>
+                 <h2>{order.user.fullname}</h2>
+                 <h2>{order.address}</h2>
+                 <h2>{order.note}</h2>
+                 <h2>{order.orderItems.length}</h2>
+
+                 <div className=
+                 {`${order.orderStatus=="Pending" ? "text-blue-500" :""}
+                 ${order.orderStatus=="Cancelled" ? "text-yellow-500" :""}
+                 ${order.orderStatus=="Approved" ? "text-red-500" :""}
+                 ${order.orderStatus=="Delivered" ? "text-green-500" :""}
+                 `}>
+                  {order.orderStatus || <div className="">Active</div>}</div>
+                 <h2 className={`
+                 ${order.paymentMethod=="Momo" ? "text-purple-700" :""}
+                 ${order.paymentMethod=="Trực tiếp" ? "text-blue-500" :""}
+                 ${order.paymentMethod=="Ví" ? "text-yellow-500" :""}
+
+                  `}>{order.paymentMethod}</h2>
+                 
+                 <h2 className="break-words">{order.totalAmount} VND</h2>
+                 <div className="flex gap-2 ml-2 ">
+                  <div className="flex justify-center items-center py-2  h-fit rounded-md px-2 bg-blue-500"
+                  onClick={()=>{handleUpdateOrder(order)}}
+                  ><UpdateIcon style={{ color: 'white', fontSize: 20 }} /></div>   
                   <div className="flex justify-center items-center py-2  h-fit rounded-md px-2 bg-green-500  "><InfoIcon style={{ color: 'white', fontSize: 20 }} /></div>                                     
                 </div>
                 </div>
